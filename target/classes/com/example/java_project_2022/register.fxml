@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.HelloController">
+
+   <children>
+      <HBox prefHeight="294.0" prefWidth="600.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <Label text="Label" />
+                  <TextField />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <TextField layoutX="10.0" layoutY="27.0" />
+                  <Label layoutX="10.0" layoutY="52.0" text="Label" />
+                  <TextField />
+                  <Label layoutX="10.0" layoutY="94.0" text="Label" />
+                  <TextField layoutX="10.0" layoutY="111.0" />
+                  <Label layoutX="10.0" layoutY="136.0" text="Label" />
+                  <TextField layoutX="10.0" layoutY="153.0" />
+                  <Label layoutX="10.0" layoutY="178.0" text="Label" />
+                  <TextField layoutX="10.0" layoutY="195.0" />
+                  <Label layoutX="10.0" layoutY="220.0" text="Label" />
+                  <TextField layoutX="10.0" layoutY="237.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <Label text="Label" />
+                  <TextField />
+                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <TextField layoutX="10.0" layoutY="27.0" />
+                  <Label layoutX="10.0" layoutY="52.0" text="Label" />
+                  <TextField layoutX="10.0" layoutY="69.0" />
+                  <Label layoutX="10.0" layoutY="94.0" text="Label" />
+                  <TextField layoutX="10.0" layoutY="111.0" />
+                  <Label layoutX="10.0" layoutY="136.0" text="Label" />
+                  <TextField layoutX="10.0" layoutY="153.0" />
+                  <Label layoutX="10.0" layoutY="178.0" text="Label" />
+                  <TextField layoutX="10.0" layoutY="195.0" />
+                  <Label layoutX="10.0" layoutY="220.0" text="Label" />
+                  <TextField layoutX="10.0" layoutY="237.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="274.0" layoutY="331.0" mnemonicParsing="false" text="Button" textAlignment="CENTER" />
+   </children>
+</AnchorPane>
