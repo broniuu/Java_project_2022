@@ -4,5 +4,5 @@ module com.example.java_project_2022 {
 
 
     opens com.example.java_project_2022 to javafx.fxml;
-    exports com.example.java_project_2022;
+
 }
