@@ -10,9 +10,9 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <Label text="Label" />
+                  <Label text="Imie" />
                   <TextField />
-                  <Label layoutX="10.0" layoutY="10.0" text="Label" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Nazwisko" />
                   <TextField layoutX="10.0" layoutY="27.0" />
                   <Label layoutX="10.0" layoutY="52.0" text="Label" />
                   <TextField />
@@ -46,6 +46,6 @@
             </VBox>
          </children>
       </HBox>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="274.0" layoutY="331.0" mnemonicParsing="false" text="Button" textAlignment="CENTER" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="274.0" layoutY="331.0" mnemonicParsing="false" text="Register" textAlignment="CENTER" />
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package com.example.java_project_2022;
 
+import databaseConnection.DbConnector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

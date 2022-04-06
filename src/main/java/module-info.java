@@ -1,6 +1,7 @@
 module com.example.java_project_2022 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.example.java_project_2022 to javafx.fxml;
