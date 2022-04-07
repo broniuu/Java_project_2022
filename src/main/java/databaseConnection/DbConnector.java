@@ -4,28 +4,39 @@ import java.sql.*;
 public class DbConnector {
     private String currentDirectoryPath = System.getProperty("user.dir");
     private final String dataBaseName = "data.db";
+    String url = "jdbc:sqlite:/"+this.currentDirectoryPath+"\\"+this.dataBaseName;
 
-    public void connect() {
-        Connection conn = null;
+    Connection connection;
+
+    public DbConnector() {
+        connection = makeConnection();
+    }
+
+    public Connection getConnection(){
+        return(connection);
+    }
+
+    public Connection makeConnection(){
         try {
-            // db parameters
-            String url = "jdbc:sqlite:/"+this.currentDirectoryPath+"\\"+this.dataBaseName;
-            // create a connection to the database
-            conn = DriverManager.getConnection(url);
+            Connection connection = DriverManager.getConnection(url);
+            return(connection);
 
-            System.out.println("Connection to SQLite has been established.");
+        }
+        catch(SQLException ex) {
+            System.out.println(ex.getMessage());
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            return(null);
         }
     }
+
+    public void close() {
+        try {
+
+            connection.close(); }
+
+        catch (SQLException sqle){
+            System.err.println("Blad przy zamykaniu polaczenia: " + sqle);
+
+        } }
 
 }
