@@ -49,7 +49,17 @@ public class UserJdbcHelper {
         }
         return users;
     }
-
+    public boolean checkUser(String login,String password) throws SQLException {
+        DbConnector dbConnector=new DbConnector();
+        Connection connection= dbConnector.getConnection();
+        ResultSet resultSet=connection.createStatement().executeQuery("SELECT Login,Password FROM Users");
+        while (resultSet.next()){
+            if(resultSet.getString(1).equals(login) && resultSet.getString(2).equals(password)){
+                return true;
+            }
+        }
+        return false;
+    }
     public boolean addUser(User user){
 
         UserComparator userComparator = new UserComparator();

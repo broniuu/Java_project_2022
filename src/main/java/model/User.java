@@ -1,5 +1,11 @@
 package model;
 
+import databaseConnection.DbConnector;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class User {
     private int userId;
     private String login;
@@ -37,6 +43,8 @@ public class User {
         this.expireDate = expireDate;
         this.cvv = cvv;
     }
+
+
 
     @Override
     public String toString() {
