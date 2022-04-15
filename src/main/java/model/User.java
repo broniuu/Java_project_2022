@@ -15,10 +15,11 @@ public class User {
     private String address;
     private String debitCardNumber;
     private String expireDate;
+    private String email;
     private String cvv;
 
     public User(int userId, String login, String password,
-                String name, String surname, String address,
+                String email,String name, String surname, String address,
                 String debitCardNumber, String expireDate, String cvv) {
         this.userId = userId;
         this.login = login;
@@ -29,12 +30,18 @@ public class User {
         this.debitCardNumber = debitCardNumber;
         this.expireDate = expireDate;
         this.cvv = cvv;
+        this.email=email;
     }
 
-    public User(String login, String password, String name,
+    public String getEmail() {
+        return email;
+    }
+
+    public User(String login, String password, String email, String name,
                 String surname, String address, String debitCardNumber,
                 String expireDate, String cvv) {
         this.login = login;
+        this.email=email;
         this.password = password;
         this.name = name;
         this.surname = surname;

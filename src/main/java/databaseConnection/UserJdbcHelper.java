@@ -13,6 +13,7 @@ import java.util.List;
 public class UserJdbcHelper {
     public static final String COLUMN_USER_ID = "UserId";
     public static final String USER_TABLE = "Users";
+    public static final String COLUMN_EMAIL = "Email";
     public static final String COLUMN_PASSWORD = "Password";
     public static final String COLUMN_LOGIN = "Login";
     public static final String COLUMN_NAME = "Name";
@@ -32,13 +33,14 @@ public class UserJdbcHelper {
                 int userId = rs.getInt(COLUMN_USER_ID);
                 String login = rs.getString(COLUMN_LOGIN);
                 String password = rs.getString(COLUMN_PASSWORD);
+                String email = rs.getString(COLUMN_EMAIL);
                 String name = rs.getString(COLUMN_NAME);
                 String surname = rs.getString(COLUMN_SURNAME);
                 String address = rs.getString(COLUMN_ADDRESS);
                 String debitCardNumber = rs.getString(COLUMN_DEBIT_CARD_NUMBER);
                 String expireDate = rs.getString(COLUMN_EXPIRE_DATE);
                 String cvv = rs.getString(COLUMN_CVV);
-                User user = new User(userId, login, password,
+                User user = new User(userId, login, password,email,
                         name, surname, address, debitCardNumber,
                         expireDate, cvv);
                 users.add(user);
@@ -74,22 +76,24 @@ public class UserJdbcHelper {
         String queryString = "INSERT INTO Users (" +
                 COLUMN_LOGIN + ", " +
                 COLUMN_PASSWORD + ", " +
+                COLUMN_EMAIL+", "+
                 COLUMN_NAME + ", " +
                 COLUMN_SURNAME + ", " +
                 COLUMN_ADDRESS + ", " +
                 COLUMN_DEBIT_CARD_NUMBER + ", " +
                 COLUMN_EXPIRE_DATE + ", " +
                 COLUMN_CVV + " " +
-                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)" ;
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
         try (PreparedStatement stmt = dbConnector.getConnection().prepareStatement(queryString)) {
             stmt.setString(1, user.getLogin());
             stmt.setString(2, user.getPassword());
-            stmt.setString(3, user.getName());
-            stmt.setString(4, user.getSurname());
-            stmt.setString(5, user.getAddress());
-            stmt.setString(6, user.getDebitCardNumber());
-            stmt.setString(7, user.getExpireDate());
-            stmt.setString(8, user.getCvv());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getName());
+            stmt.setString(5, user.getSurname());
+            stmt.setString(6, user.getAddress());
+            stmt.setString(7, user.getDebitCardNumber());
+            stmt.setString(8, user.getExpireDate());
+            stmt.setString(9, user.getCvv());
             stmt.executeUpdate();
             return true;
         }catch (SQLException e){

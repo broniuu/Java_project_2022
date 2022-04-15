@@ -15,7 +15,6 @@ import model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class LoginController {
     public TextField passwordBox;
@@ -50,7 +49,6 @@ public class LoginController {
            stage.show();
        }
     }
-
     public void registerButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
         Scene scene = new Scene(fxmlLoader.load() ,520, 540);
@@ -58,7 +56,6 @@ public class LoginController {
         stage.setScene(scene);
         stage.show();
     }
-
     public void register(ActionEvent event) throws SQLException {
         UserJdbcHelper userJdbcHelper=new UserJdbcHelper();
         if(!RPassword.getText().equals(RReapeatPassword.getText()))return;
@@ -68,23 +65,23 @@ public class LoginController {
         RExpirationDateBox.getText().isEmpty())return;
 
         String adress=""+RStreetBox.getText()+" "+RHomeNumberBox.getText()+" "+RPostCodeBox.getText();
-        User user=new User(RLogin.getText(),RPassword.getText(),RNameBox.getText(),RSurnameBox.getText(),adress,RCardNumberBox.getText(),RExpirationDateBox.getText(),RCCVBBox.getText());
+        User user=new User(RLogin.getText(),RPassword.getText(),REmail.getText(),RNameBox.getText(),RSurnameBox.getText(),adress,RCardNumberBox.getText(),RExpirationDateBox.getText(),RCCVBBox.getText());
         userJdbcHelper.addUser(user);
     }
-
     public void addToList(Event event) {
-        String name ="Personals: "+RNameBox.getText()+" "+RSurnameBox.getText()+" login: "+RLogin.getText();
+        String passes ="login: "+RLogin.getText()+",password "+RPassword.getText()+",Email: "+REmail.getText();
+        String name ="Personals: "+RNameBox.getText()+" "+RSurnameBox.getText();
         String adress="Adress: "+RStreetBox.getText()+" "+RHomeNumberBox.getText()+" "+RPostCodeBox.getText();
         String cardInfo="CardNumber "+RCardNumberBox.getText()+" CCV: "+RCCVBBox.getText()+" Expiration Date: "+RExpirationDateBox.getText();
-        List<String> list= List.of(new String[]{name, adress, cardInfo});
 
         if(RSummaryView.getItems().isEmpty()){
-
+            RSummaryView.getItems().add(passes);
             RSummaryView.getItems().add(name);
             RSummaryView.getItems().add(adress);
             RSummaryView.getItems().add(cardInfo);
         }else{
-            RSummaryView.getItems().removeAll(name,adress,cardInfo);
+            RSummaryView.getItems().removeAll(passes,name,adress,cardInfo);
+            RSummaryView.getItems().add(passes);
             RSummaryView.getItems().add(name);
             RSummaryView.getItems().add(adress);
             RSummaryView.getItems().add(cardInfo);

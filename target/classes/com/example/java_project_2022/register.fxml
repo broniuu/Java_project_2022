@@ -72,7 +72,7 @@
 
                   <Button layoutX="534.0" layoutY="332.0" mnemonicParsing="false" onAction="#register" text="Register" />
                   <Label layoutX="280.0" layoutY="177.0" text="Label" />
-                  <ListView fx:id="RSummaryView" fixedCellSize="100.0" layoutX="4.0" layoutY="50.0" prefHeight="246.0" prefWidth="593.0" />
+                  <ListView fx:id="RSummaryView" fixedCellSize="60.0" layoutX="4.0" layoutY="50.0" prefHeight="246.0" prefWidth="593.0" />
                   </children></AnchorPane>
           </content>
 
