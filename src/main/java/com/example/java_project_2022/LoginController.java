@@ -5,12 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.CurrentUser;
 import model.User;
 
 import java.io.IOException;
@@ -36,15 +38,20 @@ public class LoginController {
 
 
     public void Login(ActionEvent event) throws IOException, SQLException {
-        String li="";
-        li=li+loginBox.getText()+":";
-        li=li+passwordBox.getText();
+
+
         UserJdbcHelper userJdbcHelper=new UserJdbcHelper();
        if(userJdbcHelper.checkUser(loginBox.getText(),passwordBox.getText())) {
+           CurrentUser currentUser =new CurrentUser(loginBox.getText(),passwordBox.getText());
+
            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("restaurants.fxml"));
-           Scene scene = new Scene(fxmlLoader.load(), 520, 540);
+           Parent root=fxmlLoader.load();
+
+           RestaurantsController restaurantsController =fxmlLoader.getController();
+           restaurantsController.iniCurrentUser(currentUser);
+
            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-           stage.setUserData(li);
+           Scene scene=new Scene(root);
            stage.setScene(scene);
            stage.show();
        }

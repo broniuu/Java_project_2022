@@ -13,7 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import model.CurrentUser;
 import model.Dish;
 
 import java.io.IOException;
@@ -24,9 +27,30 @@ import java.util.ResourceBundle;
 public class DishesController implements Initializable {
     public ListView dishesList;
     public List<Dish> dishes;
-
+    public Pane topDishesPane;
+    CurrentUser currentUser;
+    MenuController controller;
+    public void iniCurrentUser(CurrentUser currentUser){
+        this.currentUser=currentUser;
+        controller.iniCurrentUser(currentUser);
+    }
     @Override
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("menu.fxml"));
+        fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
+            @Override
+            public Object call(Class<?> param) {
+                return controller = new MenuController();
+            }
+        });
+        Node view = null;
+        try {
+            view = (Node) fxmlLoader.load();
+
+        } catch (IOException ex) {
+        }
+        topDishesPane.getChildren().add(view);
 
 
     }
