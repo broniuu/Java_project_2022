@@ -4,6 +4,8 @@ public class CartItem {
     private int cartItemId;
     private Integer userId;
     private Integer dishId;
+    private User cartOwner;
+    private Dish dish;
 
     public CartItem(int cartItemId, Integer userId, Integer dishId) {
         this.cartItemId = cartItemId;

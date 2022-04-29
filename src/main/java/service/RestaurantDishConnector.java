@@ -1,11 +1,14 @@
-package model;
+package service;
+
+import model.Dish;
+import model.Restaurant;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RestaurantDishConnector {
 
-    public static void fillRestaurantWithDishes(Restaurant restaurant, List<Dish> dishes) {
+    private static void fillRestaurantWithDishes(Restaurant restaurant, List<Dish> dishes) {
         List<Dish> restaurantDishes = new ArrayList<>();
         for (Dish dish : dishes) {
             if (dish.getRestaurantId() == restaurant.getRestaurantId()) {
