@@ -1,9 +1,6 @@
 package databaseConnection;
 
 import model.CartItem;
-import model.Restaurant;
-import model.User;
-import model.UserComparator;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +14,7 @@ public class CardItemJdbcHelper {
     public static final String COLUMN_CART_ITEM_ID = "CartItemId";
     public static final String COLUMN_DISH_ID = "DishId";
     public static final String COLUMN_USER_ID = "UserId";
+    public static final String COLUMN_COUNT_OF_DISH = "CountOfDish";
 
     DbConnector dbConnector = new DbConnector();
 
@@ -29,8 +27,9 @@ public class CardItemJdbcHelper {
                 int cartItemId = rs.getInt(COLUMN_CART_ITEM_ID );
                 Integer userId = rs.getInt(COLUMN_USER_ID);
                 Integer dishId = rs.getInt(COLUMN_DISH_ID );
+                int countOfDish = rs.getInt(COLUMN_COUNT_OF_DISH);
 
-                CartItem cartItem = new CartItem(cartItemId, dishId, userId);
+                CartItem cartItem = new CartItem(cartItemId, dishId, userId, countOfDish);
                 cartItems.add(cartItem);
             }
             dbConnector.close();
@@ -46,11 +45,13 @@ public class CardItemJdbcHelper {
         String queryString = "INSERT INTO "+ SHOPPING_CART_TABLE + " (" +
                 COLUMN_CART_ITEM_ID + ", " +
                 COLUMN_DISH_ID + ", " +
-                COLUMN_USER_ID + " " +
-                ") VALUES (?, ?, ?)";
+                COLUMN_USER_ID + ", " +
+                COLUMN_COUNT_OF_DISH + " " +
+                ") VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = dbConnector.getConnection().prepareStatement(queryString)) {
             stmt.setInt(2, cartItem.getUserId());
             stmt.setInt(3, cartItem.getDishId());
+            stmt.setInt(4, cartItem.getCountOfDish());
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -59,11 +60,27 @@ public class CardItemJdbcHelper {
         }
     }
 
-    public boolean deleteUser (CartItem cartItem){
+    public boolean deleteCartItem(CartItem cartItem){
         DbConnector dbConnector = new DbConnector();
         String queryString = "DELETE FROM " + SHOPPING_CART_TABLE + " WHERE " + COLUMN_CART_ITEM_ID + " = ?";
         try (PreparedStatement stmt = dbConnector.getConnection().prepareStatement(queryString)) {
             stmt.setInt(1, cartItem.getCartItemId());
+            stmt.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    public boolean updateCartItem(CartItem cartItem) {
+        DbConnector dbConnector = new DbConnector();
+        String queryString = "UPDATE ShoppingCart\n" +
+                "   SET \n" +
+                "       CountOfDish = ?\n" +
+                " WHERE CartItemId = ?;";
+        try(PreparedStatement stmt = dbConnector.getConnection().prepareStatement(queryString)) {
+            stmt.setInt(1, cartItem.getCountOfDish());
+            stmt.setInt(2, cartItem.getCartItemId());
             stmt.executeUpdate();
             return true;
         } catch (Exception e) {
