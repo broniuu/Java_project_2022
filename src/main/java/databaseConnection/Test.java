@@ -30,7 +30,7 @@ public class Test {
         CartItem cartItem =new CartItem(2,3);
         CartItem cartItem2 =new CartItem(11,1,3);
         CartItem cartItem3 =new CartItem(12,2,3,10);
-        //boolean addItemSuccess = cardItemJdbcHelper.addCartItem(cartItem);
+        boolean addItemSuccess = cardItemJdbcHelper.addCartItem(cartItem);
         //boolean delItemSuccess = cardItemJdbcHelper.deleteCartItem(cartItem2);
         boolean updateItemSuccess = cardItemJdbcHelper.updateCartItem(cartItem3);
         List<CartItem> cartItems = cardItemJdbcHelper.getCartItems();
