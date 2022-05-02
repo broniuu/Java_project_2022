@@ -6,14 +6,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToolBar;
 import javafx.stage.Stage;
 import model.CurrentUser;
 
 import java.io.IOException;
+import java.util.Stack;
 
 public class MenuController {
     public Label currentNameLabel;
     public CurrentUser currentUser;
+    public ToolBar MenuBar;
+
     public void toSettings(ActionEvent event) {
 
     }
@@ -41,6 +45,7 @@ public class MenuController {
 
         Summary summaryController =fxmlLoader.getController();
         summaryController.iniCurrentUser(currentUser);
+        summaryController.iniSummary();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene=new Scene(root);
 
@@ -51,14 +56,14 @@ public class MenuController {
 
     public void logOff(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
-        Parent root=fxmlLoader.load();
+        Scene scene = new Scene(fxmlLoader.load(),320,240 );
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root);
-
-
-        stage.setScene(scene);
+        Stage stage=(Stage) MenuBar.getScene().getWindow();
+        stage.setScene(scene );
         stage.show();
+
+
+
     }
 
 }

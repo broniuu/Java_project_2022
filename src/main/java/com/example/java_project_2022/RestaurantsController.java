@@ -22,7 +22,7 @@ import javafx.util.Callback;
 import model.CurrentUser;
 import model.Dish;
 import model.Restaurant;
-import model.RestaurantDishConnector;
+import service.RestaurantDishConnector;
 
 import java.io.IOException;
 import java.net.URL;
@@ -135,7 +135,7 @@ public class RestaurantsController implements Initializable {
         box.getChildren().add(starLabel);
         box.getChildren().add(addButton);
 
-        Scene scene = new Scene(box,520, 540);
+        Scene scene = new Scene(box,900, 540);
         return box;
     }
 }

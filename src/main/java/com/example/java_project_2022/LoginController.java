@@ -39,10 +39,10 @@ public class LoginController {
 
     public void Login(ActionEvent event) throws IOException, SQLException {
 
-
         UserJdbcHelper userJdbcHelper=new UserJdbcHelper();
        if(userJdbcHelper.checkUser(loginBox.getText(),passwordBox.getText())) {
-           CurrentUser currentUser =new CurrentUser(loginBox.getText(),passwordBox.getText());
+           int id= userJdbcHelper.getId(loginBox.getText(),passwordBox.getText());
+           CurrentUser currentUser =new CurrentUser(loginBox.getText(),passwordBox.getText(),id);
 
            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("restaurants.fxml"));
            Parent root=fxmlLoader.load();
@@ -51,14 +51,14 @@ public class LoginController {
            restaurantsController.iniCurrentUser(currentUser);
 
            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-           Scene scene=new Scene(root);
+           Scene scene=new Scene(root,900,500);
            stage.setScene(scene);
            stage.show();
        }
     }
     public void registerButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
-        Scene scene = new Scene(fxmlLoader.load() ,520, 540);
+        Scene scene = new Scene(fxmlLoader.load() ,900, 540);
         Stage stage=(Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();

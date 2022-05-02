@@ -3,10 +3,11 @@ package model;
 public class CurrentUser {
     private String login;
     private String password;
-
-    public CurrentUser( String login, String password) {
+    private int id;
+    public CurrentUser( String login, String password,int id) {
         this.login = login;
         this.password = password;
+        this.id=id;
     }
 
     public String getLogin() {
@@ -25,4 +26,7 @@ public class CurrentUser {
         this.password = password;
     }
 
+    public Integer getId() {
+        return id;
+    }
 }

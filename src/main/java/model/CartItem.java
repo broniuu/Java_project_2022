@@ -8,19 +8,18 @@ public class CartItem {
     private User cartOwner;
     private Dish dish;
 
-    public CartItem(int cartItemId, Integer userId, Integer dishId) {
-        this.cartItemId = cartItemId;
-        this.userId = userId;
-        this.dishId = dishId;
-        this.countOfDish = 1;
-    }
+
 
     public CartItem(Integer userId, Integer dishId) {
         this.userId = userId;
         this.dishId = dishId;
         this.countOfDish = 1;
     }
-
+    public CartItem(Integer userId, Integer dishId,int countOfDish) {
+        this.userId = userId;
+        this.dishId = dishId;
+        this.countOfDish =countOfDish;
+    }
     public CartItem(int cartItemId, Integer userId, Integer dishId, int countOfDish) {
         this.cartItemId = cartItemId;
         this.userId = userId;
