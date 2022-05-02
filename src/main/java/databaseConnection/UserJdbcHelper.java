@@ -56,10 +56,8 @@ public class UserJdbcHelper {
 
         UserComparator userComparator = new UserComparator();
         List<User> users = this.getUsers();
-        for (User singleUser : users) {
-            if (userComparator.compare(user, singleUser) == 0) {
-                return false;
-            }
+        if (users.stream().anyMatch(u -> userComparator.compare(user, u) == 0)) {
+            return false;
         }
 
         DbConnector dbConnector = new DbConnector();
