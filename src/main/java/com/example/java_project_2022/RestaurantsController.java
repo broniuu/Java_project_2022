@@ -19,7 +19,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.Dish;
 import model.Restaurant;
-import model.RestaurantDishConnector;
+import service.RestaurantDishConnector;
+
 
 import java.io.IOException;
 import java.net.URL;

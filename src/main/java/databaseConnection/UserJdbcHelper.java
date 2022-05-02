@@ -53,7 +53,6 @@ public class UserJdbcHelper {
     }
 
     public boolean addUser(User user) {
-
         UserComparator userComparator = new UserComparator();
         List<User> users = this.getUsers();
         for (User singleUser : users) {
@@ -101,4 +100,5 @@ public class UserJdbcHelper {
             return false;
         }
     }
+
 }
