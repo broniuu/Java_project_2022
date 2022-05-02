@@ -40,24 +40,5 @@ public class DishJdbcHelper {
         }
         return dishes;
     }
-    public Dish getDishes(Integer Id){
-        Dish dish = null;
-        String queryString = "SELECT * FROM " + DISH_TABLE+" where DishId = "+Id;
-        try (Statement stmt = this.dbConnector.getConnection().createStatement()) {
-            ResultSet rs = stmt.executeQuery(queryString);
-            while (rs.next()) {
-                int dishId = rs.getInt(COLUMN_DISH_ID);
-                String name = rs.getString(COLUMN_NAME);
-                String description = rs.getString(COLUMN_DESCRIPTION);
-                Double price = rs.getDouble(COLUMN_PRICE);
-                int restaurantId = rs.getInt(COLUMN_RESTAURANT_ID);
-                String imageUrl = rs.getString(COLUMN_IMAGE_URL);
-                dish = new Dish(dishId, name, description, price, restaurantId, imageUrl);
-            }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return dish;
-    }
 }

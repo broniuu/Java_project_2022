@@ -38,9 +38,9 @@ public class CardItemJdbcHelper {
         }
         return cartItems;
     }
-    public List<CartItem> getCartItems(int id){
+    public List<CartItem> getCartItems(int usId){
         List<CartItem> cartItems = new ArrayList<>();
-        String queryString = "SELECT * FROM " + SHOPPING_CART_TABLE+" where UserId == "+id;
+        String queryString = "SELECT * FROM " + SHOPPING_CART_TABLE+" where UserId == "+ usId;
         try (Statement stmt = this.dbConnector.getConnection().createStatement()) {
             ResultSet rs = stmt.executeQuery(queryString);
             while (rs.next()) {

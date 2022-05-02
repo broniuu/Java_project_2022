@@ -20,6 +20,7 @@ import javafx.util.Callback;
 import model.CartItem;
 import model.CurrentUser;
 import model.Dish;
+import service.CartItemService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,12 +53,9 @@ public class Summary implements Initializable {
         DishJdbcHelper dishJdbcHelper=new DishJdbcHelper();
         List<HBox> boxes =new ArrayList<>();
         cartItems= getItems();
-
+        List<Dish> dishes =dishJdbcHelper.getDishes();
+        CartItemService.connectCartItemsWithDishes(cartItems, dishes);
         for (CartItem item:cartItems) {
-            Dish id=dishJdbcHelper.getDishes(item.getDishId());
-            item.setDish(id);
-            System.out.println(item.getDishId());
-            System.out.println(id.getDishId());
             boxes.add(newItemBox(item));
         }
         SummaryList.getItems().addAll(boxes);
