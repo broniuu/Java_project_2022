@@ -59,7 +59,27 @@ public class CardItemJdbcHelper {
             return false;
         }
     }
+    public List<CartItem> getCartItems(int usId){
+        List<CartItem> cartItems = new ArrayList<>();
+        String queryString = "SELECT * FROM " + SHOPPING_CART_TABLE+" where UserId == "+ usId;
+        try (Statement stmt = this.dbConnector.getConnection().createStatement()) {
+            ResultSet rs = stmt.executeQuery(queryString);
+            while (rs.next()) {
+                int cartItemId = rs.getInt(COLUMN_CART_ITEM_ID );
+                Integer userId = rs.getInt(COLUMN_USER_ID);
+                Integer dishId = rs.getInt(COLUMN_DISH_ID );
+                int countOfDish = rs.getInt(COLUMN_COUNT_OF_DISH);
 
+                CartItem cartItem = new CartItem(cartItemId, userId,dishId, countOfDish);
+
+                cartItems.add(cartItem);
+            }
+            dbConnector.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cartItems;
+    }
     public boolean deleteCartItem(CartItem cartItem){
         DbConnector dbConnector = new DbConnector();
         String queryString = "DELETE FROM " + SHOPPING_CART_TABLE + " WHERE " + COLUMN_CART_ITEM_ID + " = ?";
