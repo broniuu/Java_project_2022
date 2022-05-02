@@ -1,11 +1,5 @@
 package model;
 
-import databaseConnection.DbConnector;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class User {
     private int userId;
     private String login;
@@ -15,12 +9,12 @@ public class User {
     private String address;
     private String debitCardNumber;
     private String expireDate;
-    private String email;
     private String cvv;
+    private String email;
 
     public User(int userId, String login, String password,
-                String email,String name, String surname, String address,
-                String debitCardNumber, String expireDate, String cvv) {
+                String name, String surname, String address,
+                String debitCardNumber, String expireDate, String cvv, String email) {
         this.userId = userId;
         this.login = login;
         this.password = password;
@@ -30,18 +24,13 @@ public class User {
         this.debitCardNumber = debitCardNumber;
         this.expireDate = expireDate;
         this.cvv = cvv;
-        this.email=email;
+        this.email = email;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public User(String login, String password, String email, String name,
+    public User(String login, String password, String name,
                 String surname, String address, String debitCardNumber,
-                String expireDate, String cvv) {
+                String expireDate, String cvv, String email) {
         this.login = login;
-        this.email=email;
         this.password = password;
         this.name = name;
         this.surname = surname;
@@ -49,9 +38,9 @@ public class User {
         this.debitCardNumber = debitCardNumber;
         this.expireDate = expireDate;
         this.cvv = cvv;
+        this.email = email;
+
     }
-
-
 
     @Override
     public String toString() {
@@ -65,6 +54,7 @@ public class User {
                 ", debitCardNumber='" + debitCardNumber + '\'' +
                 ", expireDate='" + expireDate + '\'' +
                 ", cvv='" + cvv + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 
@@ -138,5 +128,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
