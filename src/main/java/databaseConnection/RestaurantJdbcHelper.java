@@ -13,6 +13,7 @@ public class RestaurantJdbcHelper {
     public static final String RESTAURANT_TABLE = "Restaurants";
     public static final String COLUMN_RESTAURANT_ID = "RestaurantId";
     public static final String COLUMN_NAME = "Name";
+    public static final String COLUMN_IMAGE_URL = "ImageUrl";
 
     DbConnector dbConnector = new DbConnector();
 
@@ -24,8 +25,9 @@ public class RestaurantJdbcHelper {
             while (rs.next()) {
                 int dishId = rs.getInt(COLUMN_RESTAURANT_ID);
                 String name = rs.getString(COLUMN_NAME);
+                String imageUrl = rs.getString(COLUMN_IMAGE_URL);
 
-                Restaurant restaurant = new Restaurant(dishId, name);
+                Restaurant restaurant = new Restaurant(dishId, name, imageUrl);
                 restaurants.add(restaurant);
             }
             dbConnector.close();
