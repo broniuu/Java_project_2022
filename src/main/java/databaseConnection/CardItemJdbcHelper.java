@@ -1,12 +1,14 @@
 package databaseConnection;
 
 import model.CartItem;
+import model.CartItemComparator;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class CardItemJdbcHelper {
@@ -26,13 +28,12 @@ public class CardItemJdbcHelper {
             while (rs.next()) {
                 int cartItemId = rs.getInt(COLUMN_CART_ITEM_ID );
                 Integer userId = rs.getInt(COLUMN_USER_ID);
-                Integer dishId = rs.getInt(COLUMN_DISH_ID );
+                Integer dishId = rs.getInt(COLUMN_DISH_ID);
                 int countOfDish = rs.getInt(COLUMN_COUNT_OF_DISH);
 
-                CartItem cartItem = new CartItem(cartItemId, dishId, userId, countOfDish);
+                CartItem cartItem = new CartItem(cartItemId, userId, dishId, countOfDish);
                 cartItems.add(cartItem);
             }
-            dbConnector.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -79,7 +80,27 @@ public class CardItemJdbcHelper {
             return false;
         }
     }
+    public List<CartItem> getCartItems(int usId){
+        List<CartItem> cartItems = new ArrayList<>();
+        String queryString = "SELECT * FROM " + SHOPPING_CART_TABLE+" where UserId == "+ usId;
+        try (Statement stmt = this.dbConnector.getConnection().createStatement()) {
+            ResultSet rs = stmt.executeQuery(queryString);
+            while (rs.next()) {
+                int cartItemId = rs.getInt(COLUMN_CART_ITEM_ID );
+                Integer userId = rs.getInt(COLUMN_USER_ID);
+                Integer dishId = rs.getInt(COLUMN_DISH_ID );
+                int countOfDish = rs.getInt(COLUMN_COUNT_OF_DISH);
 
+                CartItem cartItem = new CartItem(cartItemId, userId,dishId, countOfDish);
+
+                cartItems.add(cartItem);
+            }
+            dbConnector.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cartItems;
+    }
     public boolean deleteCartItem(CartItem cartItem){
         DbConnector dbConnector = new DbConnector();
         String queryString = "DELETE FROM " + SHOPPING_CART_TABLE + " WHERE " + COLUMN_CART_ITEM_ID + " = ?";
@@ -107,5 +128,18 @@ public class CardItemJdbcHelper {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    public boolean upsertCartItem(CartItem cartItem){
+        List<CartItem> cartItems = this.getCartItems();
+        CartItemComparator cartItemComparator = new CartItemComparator();
+        for (CartItem item : cartItems) {
+            if(cartItemComparator.compare(item,cartItem) == 0){
+                cartItem.setCartItemId(item.getCartItemId());
+                cartItem.setCountOfDish(item.getCountOfDish() + cartItem.getCountOfDish());
+                return this.updateCartItem(cartItem);
+            }
+        }
+        return this.addCartItem(cartItem);
     }
 }

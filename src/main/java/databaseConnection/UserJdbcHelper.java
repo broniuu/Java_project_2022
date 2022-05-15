@@ -53,12 +53,11 @@ public class UserJdbcHelper {
     }
 
     public boolean addUser(User user) {
+
         UserComparator userComparator = new UserComparator();
         List<User> users = this.getUsers();
-        for (User singleUser : users) {
-            if (userComparator.compare(user, singleUser) == 0) {
-                return false;
-            }
+        if (users.stream().anyMatch(u -> userComparator.compare(user, u) == 0)) {
+            return false;
         }
 
         DbConnector dbConnector = new DbConnector();
@@ -122,10 +121,11 @@ public class UserJdbcHelper {
         while (resultSet.next()){
             if(resultSet.getString(2).equals(login) && resultSet.getString(3).equals(password)){
 
-                 id= resultSet.getInt(1);
+                id= resultSet.getInt(1);
             }
         }
         dbConnector.close();
         return id;
     }
+
 }
