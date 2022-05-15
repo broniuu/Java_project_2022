@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.CartItem;
 import model.CurrentUser;
@@ -53,8 +52,6 @@ public class DishesController implements Initializable {
         } catch (IOException ex) {
         }
         topDishesPane.getChildren().add(view);
-
-
     }
     public void iniDishes(List<Dish> dishes ){
         this.dishes=dishes;
@@ -64,42 +61,44 @@ public class DishesController implements Initializable {
         }
     }
     public HBox newDishBox(Dish dish){
-        final int[] I = {0};
+        final int[] Quantity = {0};
         FXMLLoader fxmlLoader=new FXMLLoader();
         HBox box =new HBox();
         box.setAlignment(Pos.CENTER);
         box.setSpacing(20);
         Label nameLabel =new Label();
         Label priceLabel =new Label();
-        Label quntity=new Label("0");
+        Label quntityLabel =new Label("0");
         Button plus=new Button("+");
         plus.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                I[0]++;
-                quntity.setText(""+(I[0]));
+                Quantity[0]++;
+                quntityLabel.setText(""+(Quantity[0]));
             }
         });
         Button minus=new Button("-");
         minus.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(I[0] >0){
-                    I[0]--;
+                if(Quantity[0] >0){
+                    Quantity[0]--;
                 }
-                quntity.setText(""+(I[0]));
+                quntityLabel.setText(""+(Quantity[0]));
             }
         });
         Button addButton=new Button();
         addButton.setOnAction(new EventHandler() {
             @Override
             public void handle(Event event) {
-                if(I[0] >0){
-                    CartItem cartItem=new CartItem(currentUser.getId(),dish.getDishId(), I[0]);
+                if(Quantity[0] >0){
+                    CartItem cartItem=new CartItem(currentUser.getId(),dish.getDishId(), Quantity[0]);
                     System.out.println(dish.getDishId());
 
                     CardItemJdbcHelper CIH=new CardItemJdbcHelper();
-                    CIH.addCartItem(cartItem);
+                    CIH.upsertCartItem(cartItem);
+                    Quantity[0]=0;
+                    quntityLabel.setText(""+(Quantity[0]));
                 }
             }
         });
@@ -109,10 +108,9 @@ public class DishesController implements Initializable {
         box.getChildren().add(nameLabel);
         box.getChildren().add(priceLabel);
         box.getChildren().add(minus);
-        box.getChildren().add(quntity);
+        box.getChildren().add(quntityLabel);
         box.getChildren().add(plus);
         box.getChildren().add(addButton);
-
         Scene scene = new Scene(box,900, 540);
         return box;
     }

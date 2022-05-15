@@ -2,7 +2,7 @@ package com.example.java_project_2022;
 
 import databaseConnection.DishJdbcHelper;
 
-import databaseConnection.RestaurantsJdbcHelper;
+import databaseConnection.RestaurantJdbcHelper;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -14,14 +14,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.CurrentUser;
 import model.Dish;
+
 import model.Restaurant;
 import service.RestaurantDishConnector;
 
@@ -31,15 +31,17 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class RestaurantsController implements Initializable {
-    public ListView restaurantsList;
+   
     public Button plusButton;
     public Button minusButton;
-    public Button addButton;
+
     public Label priceLabel;
     public Label nameLabel;
     public Label quantityLabel;
     public int quantity= 0;
     public Pane topRestaurantsPane;
+    public BorderPane BorderPaneRestaurants;
+    public AnchorPane centerPane;
     CurrentUser currentUser;
     MenuController controller;
     public void iniCurrentUser(CurrentUser currentUser){
@@ -62,17 +64,24 @@ public class RestaurantsController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        RestaurantsJdbcHelper restaurantsJdbcHelper = new RestaurantsJdbcHelper();
+        RestaurantJdbcHelper restaurantsJdbcHelper = new RestaurantJdbcHelper();
         DishJdbcHelper dishJdbcHelper = new DishJdbcHelper();
         List<Dish> dishes = dishJdbcHelper.getDishes();
         List<Restaurant> restaurants = restaurantsJdbcHelper.getRestaurants();
-
+        System.out.println(restaurants.get(2).getName()+"   "+restaurants.get(2).getImageUrl());
+        GridPane restaurantLayout=new GridPane();
+        restaurantLayout.setGridLinesVisible(true);
         RestaurantDishConnector restaurantDishConnector = new RestaurantDishConnector();
         RestaurantDishConnector.fillRestaurantsWithDishes(restaurants, dishes);
-
-        for (int i = 0; i < restaurants.size(); i++) {
+        int i=0;int j=0;
+        for (Restaurant r:restaurants) {
             try {
-                restaurantsList.getItems().add(newStage(restaurants.get(i)));
+                restaurantLayout.add(newStage(r),j,i);
+                j++;
+                if(j>=3){
+                    j=0;
+                    i++;
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -91,10 +100,11 @@ public class RestaurantsController implements Initializable {
 
         } catch (IOException ex) {
         }
-
+        centerPane.getChildren().add(restaurantLayout);
         topRestaurantsPane.getChildren().add(view);
 
     }
+
     public void goToDishes(Event event,Restaurant restaurant) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dishes.fxml"));
@@ -110,15 +120,22 @@ public class RestaurantsController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    public HBox newStage(Restaurant restaurant) throws IOException {
+    public VBox newStage(Restaurant restaurant) throws IOException {
+
         FXMLLoader fxmlLoader=new FXMLLoader();
-        HBox box =new HBox();
-        box.setAlignment(Pos.CENTER);
-        box.setSpacing(20);
+        VBox vbox =new VBox();
+        HBox hbox =new HBox();
+        vbox.setAlignment(Pos.CENTER);
+        hbox.setAlignment(Pos.CENTER);
+        vbox.setSpacing(20);
         Label nameLabel =new Label();
         Label starLabel =new Label();
-        Button addButton=new Button();
-        addButton.setOnAction(new EventHandler() {
+        URL url = new URL(restaurant.getImageUrl());
+        Image im =new Image(String.valueOf(url),350,300,true,false);
+        ImageView view = new ImageView(im);
+
+        view.resize(400,300);
+        vbox.setOnMouseClicked(new EventHandler() {
             @Override
             public void handle(Event event) {
                 try {
@@ -129,14 +146,14 @@ public class RestaurantsController implements Initializable {
 
             }
         });
-        addButton.setText("Go to");
+
         nameLabel.setText(restaurant.getName());
         starLabel.setText("2/5");
-        box.getChildren().add(nameLabel);
-        box.getChildren().add(starLabel);
-        box.getChildren().add(addButton);
-
-        Scene scene = new Scene(box,900, 540);
-        return box;
+        hbox.getChildren().add(nameLabel);
+        hbox.getChildren().add(starLabel);
+        vbox.getChildren().add(view);
+        vbox.getChildren().add(hbox);
+        Scene scene = new Scene(vbox,900, 540);
+        return vbox;
     }
 }

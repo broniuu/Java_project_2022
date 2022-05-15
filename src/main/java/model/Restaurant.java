@@ -8,10 +8,6 @@ public class Restaurant {
     private String imageUrl;
     private List<Dish> dishes;
 
-    public Restaurant(int restaurantId, String name) {
-        this.restaurantId = restaurantId;
-        this.name = name;
-    }
 
     public Restaurant(int restaurantId, String name, String imageUrl) {
         this.restaurantId = restaurantId;

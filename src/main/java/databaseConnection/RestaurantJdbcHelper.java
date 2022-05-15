@@ -1,6 +1,5 @@
 package databaseConnection;
 
-import model.Dish;
 import model.Restaurant;
 
 import java.sql.ResultSet;
@@ -17,7 +16,7 @@ public class RestaurantJdbcHelper {
 
     DbConnector dbConnector = new DbConnector();
 
-    public List<Restaurant> getDRestaurants(){
+    public List<Restaurant> getRestaurants(){
         List<Restaurant> restaurants = new ArrayList<>();
         String queryString = "SELECT * FROM " + RESTAURANT_TABLE;
         try (Statement stmt = this.dbConnector.getConnection().createStatement()) {

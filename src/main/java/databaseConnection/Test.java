@@ -13,7 +13,7 @@ public class Test {
         DishJdbcHelper dishJdbcHelper = new DishJdbcHelper();
         List<Dish> dishes = dishJdbcHelper.getDishes();
         RestaurantJdbcHelper restaurantJdbcHelper = new RestaurantJdbcHelper();
-        List<Restaurant> restaurants = restaurantJdbcHelper.getDRestaurants();
+        List<Restaurant> restaurants = restaurantJdbcHelper.getRestaurants();
         RestaurantDishConnector.fillRestaurantsWithDishes(restaurants,dishes);
 
         UserJdbcHelper userJdbcHelper = new UserJdbcHelper();
