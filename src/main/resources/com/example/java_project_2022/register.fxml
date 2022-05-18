@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.LoginController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1070.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.LoginController">
   <tabs>
     <Tab text="Login Information">
       <content>
@@ -11,14 +11,15 @@
                <children>
                   <VBox alignment="TOP_CENTER" layoutX="124.0" layoutY="14.0" prefHeight="353.0" prefWidth="352.0">
                      <children>
-                        <Label alignment="CENTER" text="Login" />
+                        <Label alignment="CENTER_LEFT" text="Login" />
                         <TextField fx:id="RLogin" alignment="CENTER" />
                         <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" text="Password" />
                         <PasswordField fx:id="RPassword" />
                         <Label alignment="CENTER" layoutX="10.0" layoutY="52.0" text="Reapeat Password" />
                         <PasswordField fx:id="RReapeatPassword" layoutX="10.0" layoutY="69.0" />
                         <Label alignment="CENTER" layoutX="10.0" layoutY="52.0" text="Email" />
-                        <TextField fx:id="REmail" alignment="CENTER" layoutX="10.0" layoutY="111.0" />
+                        <TextField alignment="CENTER_LEFT"  fx:id="REmail" />
+
                      </children>
                   </VBox>
                </children></AnchorPane>
@@ -28,18 +29,18 @@
           <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                      <VBox layoutX="134.0" layoutY="14.0" prefHeight="353.0" prefWidth="333.0">
+                      <VBox alignment="CENTER" layoutX="134.0" layoutY="14.0" prefHeight="353.0" prefWidth="333.0">
                           <children>
                               <Label text="Name" />
-                              <TextField fx:id="RNameBox" />
+                              <TextField fx:id="RNameBox" alignment="CENTER" />
                               <Label text="Surname" />
-                              <TextField fx:id="RSurnameBox" />
+                              <TextField fx:id="RSurnameBox" alignment="CENTER" />
                               <Label text="Street" />
-                              <TextField fx:id="RStreetBox" />
+                              <TextField fx:id="RStreetBox" alignment="CENTER" />
                               <Label text="HomeNumber" />
-                              <TextField fx:id="RHomeNumberBox" />
+                              <TextField fx:id="RHomeNumberBox" alignment="CENTER" />
                               <Label text="PostCode" />
-                              <TextField fx:id="RPostCodeBox" />
+                              <TextField fx:id="RPostCodeBox" alignment="CENTER" />
 
                           </children>
                       </VBox>
@@ -51,14 +52,14 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <VBox layoutX="134.0" layoutY="14.0" prefHeight="353.0" prefWidth="333.0">
+                  <VBox alignment="CENTER" layoutX="134.0" layoutY="14.0" prefHeight="353.0" prefWidth="333.0">
                      <children>
-                        <Label text="Card Number" />
-                        <TextField fx:id="RCardNumberBox" />
-                        <Label text="CCV Code" />
-                        <TextField fx:id="RCCVBBox" />
-                        <Label text="Expiration date" />
-                        <TextField fx:id="RExpirationDateBox" />
+                        <Label alignment="CENTER" text="Card Number" />
+                        <TextField fx:id="RCardNumberBox" alignment="CENTER" />
+                        <Label alignment="CENTER" text="CCV Code" />
+                        <TextField fx:id="RCCVBBox" alignment="CENTER" />
+                        <Label alignment="CENTER_LEFT" text="Expiration date" />
+                        <TextField fx:id="RExpirationDateBox" alignment="CENTER" />
                      </children>
                   </VBox>
                </children></AnchorPane>

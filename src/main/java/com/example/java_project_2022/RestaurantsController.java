@@ -1,7 +1,6 @@
 package com.example.java_project_2022;
 
 import databaseConnection.DishJdbcHelper;
-
 import databaseConnection.RestaurantJdbcHelper;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -19,10 +18,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import model.CurrentUser;
 import model.Dish;
-
 import model.Restaurant;
+import model.User;
 import service.RestaurantDishConnector;
 
 import java.io.IOException;
@@ -42,9 +40,9 @@ public class RestaurantsController implements Initializable {
     public Pane topRestaurantsPane;
     public BorderPane BorderPaneRestaurants;
     public AnchorPane centerPane;
-    CurrentUser currentUser;
+    User currentUser;
     MenuController controller;
-    public void iniCurrentUser(CurrentUser currentUser){
+    public void iniCurrentUser(User currentUser){
         this.currentUser=currentUser;
         controller.iniCurrentUser(currentUser);
     }

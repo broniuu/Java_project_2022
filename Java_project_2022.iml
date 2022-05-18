@@ -11,6 +11,20 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="imageio-jpeg-3.1.2" level="project" />
+    <orderEntry type="library" name="Maven: com.google.zxing:javase:3.5.0" level="project" />
+    <orderEntry type="library" name="Maven: com.beust:jcommander:1.82" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: com.github.jai-imageio:jai-imageio-core:1.4.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.zxing:core:3.5.0" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:font-asian:7.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.13" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:forms:7.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:hyph:7.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:io:7.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:kernel:7.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:layout:7.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:pdfa:7.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:sign:7.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:barcodes:7.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.plugins:maven-assembly-plugin:maven-plugin:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-plugin-api:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.sonatype.sisu:sisu-inject-plexus:1.4.2" level="project" />
@@ -35,7 +49,6 @@
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-common-artifact-filters:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-shared-utils:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-artifact-transfer:0.11.0" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-interpolation:1.25" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-archiver:4.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.19" level="project" />
@@ -54,10 +67,6 @@
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.6" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:18" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:18" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:18" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:18" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:18" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:18" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.8.2" level="project" />
@@ -68,5 +77,12 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.8.2" level="project" />
     <orderEntry type="library" name="Maven: c3p0:c3p0:0.9.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.36.0.3" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:18.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:18.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.17.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.17.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.logging.log4j:log4j-core:2.17.1" level="project" />
   </component>
 </module>

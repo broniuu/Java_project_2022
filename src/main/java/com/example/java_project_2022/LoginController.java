@@ -12,11 +12,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.CurrentUser;
 import model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 public class LoginController {
     public TextField passwordBox;
@@ -35,14 +35,19 @@ public class LoginController {
     public PasswordField RReapeatPassword;
     public TextField REmail;
     public ListView RSummaryView;
-
+    private Pattern validEmailPattern=Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
 
     public void Login(ActionEvent event) throws IOException, SQLException {
-
         UserJdbcHelper userJdbcHelper=new UserJdbcHelper();
        if(userJdbcHelper.checkUser(loginBox.getText(),passwordBox.getText())) {
            int id= userJdbcHelper.getId(loginBox.getText(),passwordBox.getText());
-           CurrentUser currentUser =new CurrentUser(loginBox.getText(),passwordBox.getText(),id);
+           User currentUser=null;
+           for (User user:userJdbcHelper.getUsers()) {
+               if(loginBox.getText().equals(user.getLogin())){
+                   currentUser=user;
+                   break;
+               }
+           }
 
            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("restaurants.fxml"));
            Parent root=fxmlLoader.load();
@@ -67,6 +72,7 @@ public class LoginController {
         UserJdbcHelper userJdbcHelper=new UserJdbcHelper();
         if(!RPassword.getText().equals(RReapeatPassword.getText()))return;
         if(userJdbcHelper.checkUser(RLogin.getText(),RPassword.getText()))return;
+        if(!emailValidation())return;
         if(RPostCodeBox.getText().isEmpty()&&RCCVBBox.getText().isEmpty()&&RStreetBox.getText().isEmpty()&&RHomeNumberBox.getText().isEmpty()
     &&RNameBox.getText().isEmpty()&&RSurnameBox.getText().isEmpty()&&RPassword.getText().isEmpty()&&RReapeatPassword.getText().isEmpty()&&RCardNumberBox.getText().isEmpty()&&
         RExpirationDateBox.getText().isEmpty())return;
@@ -95,4 +101,14 @@ public class LoginController {
         }
 
     }
+
+  public boolean emailValidation(){
+      String s= REmail.getText();
+      if(validEmailPattern.matcher(s).matches()){
+          return true;
+      }
+      else{
+          return false;
+      }
+  }
 }

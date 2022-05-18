@@ -7,7 +7,6 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,21 +16,23 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import model.CartItem;
-import model.CurrentUser;
 import model.Dish;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static javafx.geometry.Pos.CENTER;
+
 public class DishesController implements Initializable {
     public ListView dishesList;
     public List<Dish> dishes;
     public Pane topDishesPane;
-    CurrentUser currentUser;
+    User currentUser;
     MenuController controller;
-    public void iniCurrentUser(CurrentUser currentUser){
+    public void iniCurrentUser(User currentUser){
         this.currentUser=currentUser;
         controller.iniCurrentUser(currentUser);
     }
@@ -64,7 +65,7 @@ public class DishesController implements Initializable {
         final int[] Quantity = {0};
         FXMLLoader fxmlLoader=new FXMLLoader();
         HBox box =new HBox();
-        box.setAlignment(Pos.CENTER);
+
         box.setSpacing(20);
         Label nameLabel =new Label();
         Label priceLabel =new Label();
@@ -92,7 +93,7 @@ public class DishesController implements Initializable {
             @Override
             public void handle(Event event) {
                 if(Quantity[0] >0){
-                    CartItem cartItem=new CartItem(currentUser.getId(),dish.getDishId(), Quantity[0]);
+                    CartItem cartItem=new CartItem(currentUser.getUserId(),dish.getDishId(), Quantity[0]);
                     System.out.println(dish.getDishId());
 
                     CardItemJdbcHelper CIH=new CardItemJdbcHelper();
@@ -104,12 +105,17 @@ public class DishesController implements Initializable {
         });
         addButton.setText("Add");
         nameLabel.setText(dish.getName());
+        nameLabel.setMinSize(220,20);
+        nameLabel.setMaxSize(220,20);
         priceLabel.setText(""+dish.getPrice());
+        box.setAlignment(CENTER);
         box.getChildren().add(nameLabel);
         box.getChildren().add(priceLabel);
+
         box.getChildren().add(minus);
         box.getChildren().add(quntityLabel);
         box.getChildren().add(plus);
+
         box.getChildren().add(addButton);
         Scene scene = new Scene(box,900, 540);
         return box;

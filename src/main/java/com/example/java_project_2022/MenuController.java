@@ -8,20 +8,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
 import javafx.stage.Stage;
-import model.CurrentUser;
+import model.User;
 
 import java.io.IOException;
-import java.util.Stack;
 
 public class MenuController {
     public Label currentNameLabel;
-    public CurrentUser currentUser;
+    public User currentUser;
     public ToolBar MenuBar;
 
     public void toSettings(ActionEvent event) {
 
     }
-    public void iniCurrentUser(CurrentUser currentUser){
+    public void iniCurrentUser(User currentUser){
         this.currentUser=currentUser;
         currentNameLabel.setText(this.currentUser.getLogin());
     }

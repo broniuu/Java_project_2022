@@ -1,5 +1,7 @@
 package com.example.java_project_2022;
 
+import ReceiptPrinter.PdfPrinter;
+import com.google.zxing.WriterException;
 import databaseConnection.CardItemJdbcHelper;
 import databaseConnection.DishJdbcHelper;
 import javafx.event.ActionEvent;
@@ -18,8 +20,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.CartItem;
-import model.CurrentUser;
 import model.Dish;
+import model.User;
 import service.CartItemService;
 
 import java.io.IOException;
@@ -34,14 +36,15 @@ public class Summary implements Initializable {
     public Label priceLabel;
     public BorderPane BPane;
     public ChoiceBox deliveryBox;
-    CurrentUser currentUser;
+    User currentUser;
+    String delivery="Delivery";
     List<CartItem> cartItems;
     String note="";
     MenuController menuController;
     private double deliveryFee;
     private double costOFDelivery=9.99;
 
-    public void iniCurrentUser(CurrentUser currentUser){
+    public void iniCurrentUser(User currentUser){
         this.currentUser=currentUser;
         menuController.iniCurrentUser(currentUser);
     }
@@ -83,7 +86,7 @@ public class Summary implements Initializable {
     }
     public List<CartItem> getItems(){
         CardItemJdbcHelper cardItemJdbcHelper = new CardItemJdbcHelper();
-        return cardItemJdbcHelper.getCartItems(currentUser.getId());
+        return cardItemJdbcHelper.getCartItems(currentUser.getUserId());
 
     }
     public HBox newItemBox(CartItem cartItem){
@@ -151,7 +154,7 @@ public class Summary implements Initializable {
         }
         priceLabel.setText(""+(sum+deliveryFee)+"zl");
     }
-    public void Order(ActionEvent event) {
+    public void Order(ActionEvent event) throws IOException, WriterException {
         //dodać drukowanie paragonu
 
         //oprożnić koszyk
@@ -159,11 +162,14 @@ public class Summary implements Initializable {
             CardItemJdbcHelper cardItemJdbcHelper=new CardItemJdbcHelper();
             cardItemJdbcHelper.deleteCartItem(item);
         }
+        PdfPrinter pdfPrinter=new PdfPrinter();
+        pdfPrinter.makePdf(currentUser,cartItems,deliveryBox.getValue().equals(delivery),note);
         //wyswietlic podziekowanie za zakup
         thanksnote();
         clear();
         iniSummary();
     }
+
     public void thanksnote() {
         Stage popupwindow=new Stage();
         VBox layout= new VBox(10);

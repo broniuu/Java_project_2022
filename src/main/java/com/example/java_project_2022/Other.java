@@ -5,7 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
-import model.CurrentUser;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,9 +14,9 @@ import java.util.ResourceBundle;
 public class Other implements Initializable {
     public Pane topSettingsPane;
     MenuController menuController;
-    CurrentUser currentUser;
+    User currentUser;
 
-    public void iniCurrentUser(CurrentUser currentUser){
+    public void iniCurrentUser(User currentUser){
         this.currentUser=currentUser;
         menuController.iniCurrentUser(currentUser);
     }
