@@ -1,4 +1,6 @@
-package model;
+package service;
+
+import model.User;
 
 import java.util.Comparator;
 

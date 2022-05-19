@@ -1,13 +1,10 @@
 package databaseConnection;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.User;
-import model.UserComparator;
+import service.UserComparator;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class UserJdbcHelper {
