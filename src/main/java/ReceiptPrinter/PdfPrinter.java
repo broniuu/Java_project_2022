@@ -17,7 +17,7 @@ import com.itextpdf.layout.property.HorizontalAlignment;
 import model.CartItem;
 import model.User;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -26,9 +26,9 @@ import static ReceiptPrinter.QrCode.getImageAsByteArray;
 import static com.itextpdf.kernel.geom.PageSize.A4;
 
 public class PdfPrinter {
-    PdfWriter pdfWriter=new PdfWriter("D:\\123\\Customer.pdf");
+    PdfWriter pdfWriter=new PdfWriter(new File("./plik.pdf").getCanonicalPath());
 
-    public PdfPrinter() throws FileNotFoundException {
+    public PdfPrinter() throws IOException {
     }
 
     public void makePdf(User currentUser, List<CartItem> cartItems, boolean delivery, String note) throws IOException, WriterException {

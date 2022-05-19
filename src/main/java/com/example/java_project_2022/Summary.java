@@ -62,7 +62,7 @@ public class Summary implements Initializable {
             boxes.add(newItemBox(item));
         }
         SummaryList.getItems().addAll(boxes);
-        updatedPrice();
+
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,6 +82,7 @@ public class Summary implements Initializable {
         topSummaryPane.getChildren().add(view);
         deliveryBox.getItems().add("Delivery");
         deliveryBox.getItems().add("Takeaway");
+
         
     }
     public List<CartItem> getItems(){
@@ -148,11 +149,14 @@ public class Summary implements Initializable {
         return box;
     }
     public void updatedPrice() {
-        double sum=0;
-        for (CartItem item:cartItems) {
-            sum+=(item.getDish().getPrice()*item.getCountOfDish());
+        if(deliveryBox.getValue().equals("Takeaway") || deliveryBox.getValue().equals("Delivery")){
+            double sum=0;
+            for (CartItem item:cartItems) {
+                sum+=(item.getDish().getPrice()*item.getCountOfDish());
+            }
+            priceLabel.setText(""+(sum+deliveryFee)+"zl");
         }
-        priceLabel.setText(""+(sum+deliveryFee)+"zl");
+
     }
     public void Order(ActionEvent event) throws IOException, WriterException {
         //dodać drukowanie paragonu
