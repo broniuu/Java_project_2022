@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Other implements Initializable {
+public class SettingController implements Initializable {
     public Pane topSettingsPane;
     MenuController menuController;
     User currentUser;

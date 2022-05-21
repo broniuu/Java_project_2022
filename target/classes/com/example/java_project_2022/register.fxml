@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1070.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.LoginController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1070.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.RegistrationController">
   <tabs>
     <Tab text="Login Information">
       <content>
@@ -58,7 +58,7 @@
                         <TextField fx:id="RCardNumberBox" alignment="CENTER" />
                         <Label alignment="CENTER" text="CCV Code" />
                         <TextField fx:id="RCCVBBox" alignment="CENTER" />
-                        <Label alignment="CENTER_LEFT" text="Expiration date" />
+                        <Label text="Expiration date" />
                         <TextField fx:id="RExpirationDateBox" alignment="CENTER" />
                      </children>
                   </VBox>

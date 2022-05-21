@@ -30,14 +30,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class Summary implements Initializable {
+public class SummaryController implements Initializable {
     public Pane topSummaryPane;
     public ListView SummaryList;
     public Label priceLabel;
     public BorderPane BPane;
     public ChoiceBox deliveryBox;
+    CardItemJdbcHelper cardItemJdbcHelper;
     User currentUser;
     String delivery="Delivery";
+    String takeaway="Takeaway";
     List<CartItem> cartItems;
     String note="";
     MenuController menuController;
@@ -80,18 +82,18 @@ public class Summary implements Initializable {
         } catch (IOException ex) {
         }
         topSummaryPane.getChildren().add(view);
-        deliveryBox.getItems().add("Delivery");
-        deliveryBox.getItems().add("Takeaway");
+        deliveryBox.getItems().add(delivery);
+        deliveryBox.getItems().add(takeaway);
 
         
     }
     public List<CartItem> getItems(){
-        CardItemJdbcHelper cardItemJdbcHelper = new CardItemJdbcHelper();
+        cardItemJdbcHelper = new CardItemJdbcHelper();
         return cardItemJdbcHelper.getCartItems(currentUser.getUserId());
 
     }
     public HBox newItemBox(CartItem cartItem){
-        CardItemJdbcHelper cardItemJdbcHelper=new CardItemJdbcHelper();
+        cardItemJdbcHelper=new CardItemJdbcHelper();
         final int[] I = {cartItem.getCountOfDish()};
         FXMLLoader fxmlLoader=new FXMLLoader();
         HBox box =new HBox();
@@ -149,7 +151,8 @@ public class Summary implements Initializable {
         return box;
     }
     public void updatedPrice() {
-        if(deliveryBox.getValue().equals("Takeaway") || deliveryBox.getValue().equals("Delivery")){
+        if(deliveryBox.getValue()==null) deliveryBox.setValue(delivery);
+        if(deliveryBox.getValue().equals(takeaway) || deliveryBox.getValue().equals(delivery)){
             double sum=0;
             for (CartItem item:cartItems) {
                 sum+=(item.getDish().getPrice()*item.getCountOfDish());
@@ -163,7 +166,7 @@ public class Summary implements Initializable {
 
         //oprożnić koszyk
         for (CartItem item: cartItems) {
-            CardItemJdbcHelper cardItemJdbcHelper=new CardItemJdbcHelper();
+            cardItemJdbcHelper=new CardItemJdbcHelper();
             cardItemJdbcHelper.deleteCartItem(item);
         }
         PdfPrinter pdfPrinter=new PdfPrinter();
@@ -218,7 +221,7 @@ public class Summary implements Initializable {
     }
 
     public void Delivery(ActionEvent event) {
-        if(deliveryBox.getValue().equals("Delivery")){
+        if(deliveryBox.getValue().equals(delivery)){
             deliveryFee=costOFDelivery;
         }
         else{

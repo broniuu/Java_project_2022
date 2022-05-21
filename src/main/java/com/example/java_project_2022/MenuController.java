@@ -42,7 +42,7 @@ public class MenuController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("summary.fxml"));
         Parent root=fxmlLoader.load();
 
-        Summary summaryController =fxmlLoader.getController();
+        SummaryController summaryController =fxmlLoader.getController();
         summaryController.iniCurrentUser(currentUser);
         summaryController.iniSummary();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -54,7 +54,7 @@ public class MenuController {
     }
 
     public void logOff(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),320,240 );
 
         Stage stage=(Stage) MenuBar.getScene().getWindow();

@@ -118,9 +118,8 @@ public class RestaurantsController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    public VBox newStage(Restaurant restaurant) throws IOException {
 
-        FXMLLoader fxmlLoader=new FXMLLoader();
+    public VBox newStage(Restaurant restaurant) throws IOException {
         VBox vbox =new VBox();
         HBox hbox =new HBox();
         vbox.setAlignment(Pos.CENTER);
@@ -151,7 +150,6 @@ public class RestaurantsController implements Initializable {
         hbox.getChildren().add(starLabel);
         vbox.getChildren().add(view);
         vbox.getChildren().add(hbox);
-        Scene scene = new Scene(vbox,900, 540);
         return vbox;
     }
 }
