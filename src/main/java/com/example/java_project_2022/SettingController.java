@@ -19,7 +19,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.User;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

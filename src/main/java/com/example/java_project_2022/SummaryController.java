@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static ReceiptPrinter.PdfPrinter.makePdf;
+import static service.MailService.sendEmail;
 
 public class SummaryController implements Initializable {
     public Pane topSummaryPane;
@@ -164,7 +165,7 @@ public class SummaryController implements Initializable {
     }
     public void Order(ActionEvent event) throws IOException, WriterException {
         //dodać drukowanie paragonu
-
+        if(deliveryBox.getValue() == null) return;
         //oprożnić koszyk
         for (CartItem item: cartItems) {
             cardItemJdbcHelper=new CardItemJdbcHelper();
@@ -175,6 +176,7 @@ public class SummaryController implements Initializable {
         thanksnote();
         clear();
         iniSummary();
+        sendEmail(currentUser.getEmail(),"Receipt for "+currentUser.getLogin(),"Thank you for Buying with Szama(n)");
     }
 
     public void thanksnote() {

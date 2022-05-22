@@ -62,7 +62,7 @@ public class RegistrationController {
                 RExpirationDateBox.getText().isEmpty())return;
 
         String adress=""+RStreetBox.getText()+" "+RHomeNumberBox.getText()+" "+RPostCodeBox.getText();
-        User user=new User(RLogin.getText(),RPassword.getText(),REmail.getText(),RNameBox.getText(),RSurnameBox.getText(),adress,RCardNumberBox.getText(),RExpirationDateBox.getText(),RCCVBBox.getText());
+        User user=new User(RLogin.getText(),RPassword.getText(),RNameBox.getText(),RSurnameBox.getText(),adress,RCardNumberBox.getText(),RExpirationDateBox.getText(),RCCVBBox.getText(),REmail.getText());
         userJdbcHelper.addUser(user);
         gotoLogin(event);
     }
