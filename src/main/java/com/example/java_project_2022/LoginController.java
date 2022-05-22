@@ -38,14 +38,14 @@ public class LoginController {
            restaurantsController.iniCurrentUser(currentUser);
 
            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-           Scene scene=new Scene(root,900,500);
+           Scene scene=new Scene(root,1070,560);
            stage.setScene(scene);
            stage.show();
        }
     }
     public void registerButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
-        Scene scene = new Scene(fxmlLoader.load() ,900, 540);
+        Scene scene = new Scene(fxmlLoader.load() ,1070,560);
         Stage stage=(Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();

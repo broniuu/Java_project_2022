@@ -1,13 +1,10 @@
 package databaseConnection;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.User;
 import model.UserComparator;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class UserJdbcHelper {
@@ -69,8 +66,9 @@ public class UserJdbcHelper {
                 COLUMN_ADDRESS + ", " +
                 COLUMN_DEBIT_CARD_NUMBER + ", " +
                 COLUMN_EXPIRE_DATE + ", " +
-                COLUMN_CVV + " " +
-                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                COLUMN_CVV + ", " +
+                COLUMN_EMAIL + " " +
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = dbConnector.getConnection().prepareStatement(queryString)) {
             stmt.setString(1, user.getLogin());
             stmt.setString(2, user.getPassword());
@@ -80,6 +78,7 @@ public class UserJdbcHelper {
             stmt.setString(6, user.getDebitCardNumber());
             stmt.setString(7, user.getExpireDate());
             stmt.setString(8, user.getCvv());
+            stmt.setString(9, user.getEmail());
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -126,6 +125,41 @@ public class UserJdbcHelper {
         }
         dbConnector.close();
         return id;
+    }
+
+    public boolean updateUser(User user){
+        DbConnector dbConnector = new DbConnector();
+        String queryString = "UPDATE " + USER_TABLE + "\n" +
+                "   SET \n" +
+                "       "+ COLUMN_LOGIN + " = ?,\n" +
+                "       "+ COLUMN_PASSWORD + " = ?,\n" +
+                "       "+ COLUMN_NAME + " = ?,\n" +
+                "       "+ COLUMN_SURNAME + " = ?,\n" +
+                "       "+ COLUMN_ADDRESS + " = ?,\n" +
+                "       "+ COLUMN_DEBIT_CARD_NUMBER + " = ?,\n" +
+                "       "+ COLUMN_EXPIRE_DATE + " = ?,\n" +
+                "       "+ COLUMN_CVV + " = ?,\n" +
+                "       "+ COLUMN_EMAIL + " = ?\n" +
+                " WHERE "+ COLUMN_USER_ID +" = ?;";
+        Connection connection= dbConnector.getConnection();
+        try(PreparedStatement stmt = connection.prepareStatement(queryString)) {
+            stmt.setString(1, user.getLogin());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, user.getName());
+            stmt.setString(4, user.getSurname());
+            stmt.setString(5, user.getAddress());
+            stmt.setString(6, user.getDebitCardNumber());
+            stmt.setString(7, user.getExpireDate());
+            stmt.setString(8, user.getCvv());
+            stmt.setString(9, user.getEmail());
+            stmt.setInt(10, user.getUserId());
+            stmt.executeUpdate();
+            connection.close();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
 }

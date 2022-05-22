@@ -1,6 +1,5 @@
 package com.example.java_project_2022;
 
-import ReceiptPrinter.PdfPrinter;
 import com.google.zxing.WriterException;
 import databaseConnection.CardItemJdbcHelper;
 import databaseConnection.DishJdbcHelper;
@@ -29,6 +28,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static ReceiptPrinter.PdfPrinter.makePdf;
 
 public class SummaryController implements Initializable {
     public Pane topSummaryPane;
@@ -169,8 +170,7 @@ public class SummaryController implements Initializable {
             cardItemJdbcHelper=new CardItemJdbcHelper();
             cardItemJdbcHelper.deleteCartItem(item);
         }
-        PdfPrinter pdfPrinter=new PdfPrinter();
-        pdfPrinter.makePdf(currentUser,cartItems,deliveryBox.getValue().equals(delivery),note);
+        makePdf(currentUser,cartItems,deliveryBox.getValue().equals(delivery),note);
         //wyswietlic podziekowanie za zakup
         thanksnote();
         clear();

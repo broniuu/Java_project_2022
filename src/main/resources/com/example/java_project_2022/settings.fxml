@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane fx:controller="com.example.java_project_2022.SettingController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <Pane fx:id="topSettingsPane" prefHeight="60.0" prefWidth="700.0" BorderPane.alignment="CENTER" />
-   </top>
-</BorderPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.SettingController">
+   <children>
+      <HBox fx:id="topPane" prefHeight="70.0" prefWidth="600.0" />
+      <VBox fx:id="mainPane" alignment="TOP_CENTER" prefHeight="330.0" prefWidth="600.0" spacing="20">
+         <children>
+            <Button mnemonicParsing="false" onAction="#changeLoginInfo" text="Change Login Information" />
+            <Button onAction="#changePaymentInfo" mnemonicParsing="false" text="Change Payment Information" />
+            <Button onAction="#deleteAccount" mnemonicParsing="false" text="Delete User" />
+         </children></VBox>
+   </children>
+</VBox>

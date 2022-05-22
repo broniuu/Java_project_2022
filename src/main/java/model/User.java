@@ -42,6 +42,19 @@ public class User {
 
     }
 
+    public User(User user) {
+        this.userId=user.getUserId();
+        this.login=user.getLogin();
+        this.password=user.getPassword();
+        this.name=user.getName();
+        this.surname=user.getSurname();
+        this.cvv=user.getCvv();
+        this.address=user.getAddress();
+        this.debitCardNumber=user.getDebitCardNumber();
+        this.expireDate=user.getExpireDate();
+        this.email=user.getEmail();
+    }
+
     @Override
     public String toString() {
         return "User{" +

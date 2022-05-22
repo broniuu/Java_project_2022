@@ -3,13 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ToolBar fx:id="MenuBar" maxHeight="60" maxWidth="700" prefHeight="57.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.MenuController">
+<ToolBar fx:id="MenuBar" maxHeight="60" maxWidth="1070.0" prefHeight="60.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.MenuController">
   <items>
     <Button alignment="CENTER" mnemonicParsing="false" onAction="#toSettings" text="Settings" />
       <Button mnemonicParsing="false" onAction="#toRestaurants" text="Restaurants" />
       <Button mnemonicParsing="false" onAction="#toSummary" text="Summary" />
-      <HBox prefHeight="47.0" prefWidth="369.0" />
+      <HBox prefHeight="50.0" prefWidth="711.0" />
       <Label fx:id="currentNameLabel" text="name" />
       <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#logOff" text="Logoff" />
+
   </items>
 </ToolBar>

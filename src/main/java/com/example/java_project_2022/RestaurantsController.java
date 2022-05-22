@@ -112,7 +112,7 @@ public class RestaurantsController implements Initializable {
         dishesController.iniDishes(restaurant.getDishes());
         dishesController.iniCurrentUser(currentUser);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root);
+        Scene scene=new Scene(root,1070,560);;
 
 
         stage.setScene(scene);
@@ -126,7 +126,6 @@ public class RestaurantsController implements Initializable {
         hbox.setAlignment(Pos.CENTER);
         vbox.setSpacing(20);
         Label nameLabel =new Label();
-        Label starLabel =new Label();
         URL url = new URL(restaurant.getImageUrl());
         Image im =new Image(String.valueOf(url),350,300,true,false);
         ImageView view = new ImageView(im);
@@ -145,9 +144,9 @@ public class RestaurantsController implements Initializable {
         });
 
         nameLabel.setText(restaurant.getName());
-        starLabel.setText("2/5");
+
         hbox.getChildren().add(nameLabel);
-        hbox.getChildren().add(starLabel);
+
         vbox.getChildren().add(view);
         vbox.getChildren().add(hbox);
         return vbox;

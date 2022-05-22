@@ -26,12 +26,8 @@ import static ReceiptPrinter.QrCode.getImageAsByteArray;
 import static com.itextpdf.kernel.geom.PageSize.A4;
 
 public class PdfPrinter {
-    PdfWriter pdfWriter=new PdfWriter(new File("./plik.pdf").getCanonicalPath());
-
-    public PdfPrinter() throws IOException {
-    }
-
-    public void makePdf(User currentUser, List<CartItem> cartItems, boolean delivery, String note) throws IOException, WriterException {
+    public static void makePdf(User currentUser, List<CartItem> cartItems, boolean delivery, String note) throws IOException, WriterException {
+        PdfWriter pdfWriter=new PdfWriter(new File("./plik.pdf").getCanonicalPath());
         Random random=new Random();
         long nr= random.nextLong(2, (long) 123.00);
 
