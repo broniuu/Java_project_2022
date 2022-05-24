@@ -1,9 +1,6 @@
 package com.example.java_project_2022;
 
 import databaseConnection.CardItemJdbcHelper;
-import databaseConnection.DishJdbcHelper;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,12 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.CartItem;
 import model.Dish;
 import model.User;
@@ -45,15 +40,10 @@ public class DishesController implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("menu.fxml"));
-        fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
-            @Override
-            public Object call(Class<?> param) {
-                return controller = new MenuController();
-            }
-        });
+        fxmlLoader.setControllerFactory(param -> controller = new MenuController());
         Node view = null;
         try {
-            view = (Node) fxmlLoader.load();
+            view = fxmlLoader.load();
 
         } catch (IOException ex) {
         }
@@ -61,7 +51,6 @@ public class DishesController implements Initializable {
     }
     public void iniDishes(List<Dish> dishes ) throws MalformedURLException {
         this.dishes=dishes;
-        DishJdbcHelper dishJdbcHelper=new DishJdbcHelper();
         for (Dish d:dishes) {
             dishesList.getItems().add(newDishBox(d));
         }
@@ -76,52 +65,40 @@ public class DishesController implements Initializable {
         Label priceLabel =new Label();
         Label quntityLabel =new Label("0");
         Button plus=new Button("+");
-        plus.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Quantity[0]++;
-                quntityLabel.setText(""+(Quantity[0]));
-            }
+        plus.setOnAction(event -> {
+            Quantity[0]++;
+            quntityLabel.setText(""+(Quantity[0]));
         });
         Button minus=new Button("-");
-        minus.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(Quantity[0] >0){
-                    Quantity[0]--;
-                }
+        minus.setOnAction(event -> {
+            if(Quantity[0] >0){
+                Quantity[0]--;
+            }
+            quntityLabel.setText(""+(Quantity[0]));
+        });
+        Button addButton=new Button();
+        addButton.setOnAction((EventHandler) event -> {
+            if(Quantity[0] >0){
+                CartItem cartItem=new CartItem(currentUser.getUserId(),dish.getDishId(), Quantity[0]);
+                System.out.println(dish.getDishId());
+
+                CardItemJdbcHelper CIH=new CardItemJdbcHelper();
+                CIH.upsertCartItem(cartItem);
+                Quantity[0]=0;
                 quntityLabel.setText(""+(Quantity[0]));
             }
         });
-        Button addButton=new Button();
-        addButton.setOnAction(new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                if(Quantity[0] >0){
-                    CartItem cartItem=new CartItem(currentUser.getUserId(),dish.getDishId(), Quantity[0]);
-                    System.out.println(dish.getDishId());
 
-                    CardItemJdbcHelper CIH=new CardItemJdbcHelper();
-                    CIH.upsertCartItem(cartItem);
-                    Quantity[0]=0;
-                    quntityLabel.setText(""+(Quantity[0]));
+        box.setOnMouseClicked(mouseEvent -> {
+        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+            if(mouseEvent.getClickCount() == 2){
+                try {
+                    viewDish(dish);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-        });
-
-        box.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-            if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                if(mouseEvent.getClickCount() == 2){
-                    try {
-                        viewDish(dish);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            }
+        }
         });
 
         addButton.setText("Add");
@@ -138,7 +115,6 @@ public class DishesController implements Initializable {
         box.getChildren().add(plus);
 
         box.getChildren().add(addButton);
-        Scene scene = new Scene(box,900, 540);
         return box;
     }
     public void viewDish(Dish dish) throws IOException {

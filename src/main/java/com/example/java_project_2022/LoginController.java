@@ -33,8 +33,6 @@ public class LoginController {
                     currentUser = new User(user);
                 }
             }
-
-
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("restaurants.fxml"));
                 Parent root = fxmlLoader.load();
 

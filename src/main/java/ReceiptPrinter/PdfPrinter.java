@@ -39,14 +39,12 @@ public class PdfPrinter {
         for (CartItem cartItem:cartItems) {
             if(it>=12){
                 orders2.add(cartItem.getDish().getName()+" x"+cartItem.getCountOfDish());
-                price+=cartItem.getCountOfDish()*cartItem.getDish().getPrice();
-                qrOrders.append(cartItem.getDish().getName()).append(" x").append(cartItem.getCountOfDish());
             }
             else{
                 orders.add(cartItem.getDish().getName()+" x"+cartItem.getCountOfDish());
-                price+=cartItem.getCountOfDish()*cartItem.getDish().getPrice();
-                qrOrders.append(cartItem.getDish().getName()).append(" x").append(cartItem.getCountOfDish());
             }
+            price+=cartItem.getCountOfDish()*cartItem.getDish().getPrice();
+            qrOrders.append(cartItem.getDish().getName()).append(" x").append(cartItem.getCountOfDish());
             it++;
         }
         PdfDocument pdfDocument=new PdfDocument(pdfWriter);

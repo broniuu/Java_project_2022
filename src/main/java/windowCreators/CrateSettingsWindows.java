@@ -1,8 +1,6 @@
 package windowCreators;
 
 import databaseConnection.UserJdbcHelper;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,13 +25,10 @@ public class CrateSettingsWindows {
         PasswordField currentPasswordWindow=new PasswordField();
         Button confirmButton = new Button("Confirm");
         final Boolean[] isCorrect = {false};
-        confirmButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(currentPasswordWindow.getText().equals(currentUser.getPassword()))
-                    popupWindow.close();
-                isCorrect[0] =true;
-            }
+        confirmButton.setOnAction(event -> {
+            if(currentPasswordWindow.getText().equals(currentUser.getPassword()))
+                popupWindow.close();
+            isCorrect[0] =true;
         });
         layout.getChildren().addAll(currentPassword,currentPasswordWindow,confirmButton);
         layout.setAlignment(Pos.CENTER);
@@ -66,41 +61,32 @@ public class CrateSettingsWindows {
         TextField currentAdressWindow=new TextField(currentUser.getAddress());
 
         Button saveButton= new Button("Save");
-        saveButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        saveButton.setOnAction(event -> {
 
-                if(!debitCardValidator(currentDebitCardWindow.getText())){SnackBarCreator.showSnackBar(layout,invalidCard); return;}
-                if(!cvvValidator(currentDebitCardCvvWindow.getText())){SnackBarCreator.showSnackBar(layout,invalidCvv); return;}
-                if(!expireDateValidator(currentExpireDateWindow.getText())){SnackBarCreator.showSnackBar(layout,expireDate); return;}
+            if(!debitCardValidator(currentDebitCardWindow.getText())){SnackBarCreator.showSnackBar(layout,invalidCard); return;}
+            if(!cvvValidator(currentDebitCardCvvWindow.getText())){SnackBarCreator.showSnackBar(layout,invalidCvv); return;}
+            if(!expireDateValidator(currentExpireDateWindow.getText())){SnackBarCreator.showSnackBar(layout,expireDate); return;}
 
-                if(!currentSurnameWindow.getText().isEmpty()&&!currentNameWindow.getText().isEmpty()){
-                    newUser.setName(currentNameWindow.getText());
-                    newUser.setSurname(currentSurnameWindow.getText());
-                    newUser.setDebitCardNumber(currentDebitCardNumber.getText());
-                    newUser.setDebitCardNumber(currentDebitCardWindow.getText());
-                    newUser.setCvv(currentDebitCardCvvWindow.getText());
-                    newUser.setExpireDate(currentExpireDateWindow.getText());
-                }
-                if(checkPassword(enterToAcceptChanges,currentUser)){
-                    UserJdbcHelper userJdbcHelper;
-                    userJdbcHelper=new UserJdbcHelper();
-                    userJdbcHelper.updateUser(newUser);
-
-                    popupWindow.close();
-                }
-
+            if(!currentSurnameWindow.getText().isEmpty()&&!currentNameWindow.getText().isEmpty()){
+                newUser.setName(currentNameWindow.getText());
+                newUser.setSurname(currentSurnameWindow.getText());
+                newUser.setDebitCardNumber(currentDebitCardNumber.getText());
+                newUser.setDebitCardNumber(currentDebitCardWindow.getText());
+                newUser.setCvv(currentDebitCardCvvWindow.getText());
+                newUser.setExpireDate(currentExpireDateWindow.getText());
             }
+            if(checkPassword(enterToAcceptChanges,currentUser)){
+                UserJdbcHelper userJdbcHelper;
+                userJdbcHelper=new UserJdbcHelper();
+                userJdbcHelper.updateUser(newUser);
+
+                popupWindow.close();
+            }
+
         });
 
         Button exitButton=new Button("Exit");
-        exitButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                popupWindow.close();
-
-            }
-        });
+        exitButton.setOnAction(event -> popupWindow.close());
         layout.getChildren().addAll(currentName,currentNameWindow, currentSurname, currentSurnameWindow, currentDebitCardNumber,currentDebitCardWindow,
                 currentDebitCardCvv,currentDebitCardCvvWindow,currentDebitExpireDate,currentExpireDateWindow,currentAdress,currentAdressWindow,
                 saveButton,exitButton);
@@ -126,48 +112,39 @@ public class CrateSettingsWindows {
         TextField currentEmailWindow=new TextField(currentUser.getEmail());
         PasswordField currentPasswordWindow=new PasswordField();
         Button saveButton= new Button("Save");
-        saveButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(!currentLoginWindow.getText().equals(currentUser.getLogin())){
-                    try {
-                        if(!userJdbcHelper.isLoginFree(currentLoginWindow.getText())){SnackBarCreator.showSnackBar(layout,invalidLogin); return;}
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+        saveButton.setOnAction(event -> {
+            if(!currentLoginWindow.getText().equals(currentUser.getLogin())){
+                try {
+                    if(!userJdbcHelper.isLoginFree(currentLoginWindow.getText())){SnackBarCreator.showSnackBar(layout,invalidLogin); return;}
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-
-                if(!emailValidator(currentEmailWindow.getText())){SnackBarCreator.showSnackBar(layout,invalidEmail); return;}
-                if(!currentPasswordWindow.getText().isEmpty()){
-                    if(!passwordValidator(currentPasswordWindow.getText())){SnackBarCreator.showSnackBar(layout,incorrectPassword); return;}
-                }
-                if(!currentEmailWindow.getText().isEmpty()&&!currentLoginWindow.getText().isEmpty()){
-
-                    newUser.setLogin(currentLoginWindow.getText().toString());
-                    newUser.setEmail(currentEmailWindow.getText().toString());
-
-                    if(!currentPasswordWindow.getText().isEmpty()){
-                        newUser.setPassword(currentPasswordWindow.getText().toString());
-                    }
-                }
-                if(checkPassword(enterToAcceptChanges,currentUser)){
-                    UserJdbcHelper userJdbcHelper;
-                    userJdbcHelper=new UserJdbcHelper();
-                    userJdbcHelper.updateUser(newUser);
-
-                    popupWindow.close();
-                }
-
             }
+
+            if(!emailValidator(currentEmailWindow.getText())){SnackBarCreator.showSnackBar(layout,invalidEmail); return;}
+            if(!currentPasswordWindow.getText().isEmpty()){
+                if(!passwordValidator(currentPasswordWindow.getText())){SnackBarCreator.showSnackBar(layout,incorrectPassword); return;}
+            }
+            if(!currentEmailWindow.getText().isEmpty()&&!currentLoginWindow.getText().isEmpty()){
+
+                newUser.setLogin(currentLoginWindow.getText());
+                newUser.setEmail(currentEmailWindow.getText());
+
+                if(!currentPasswordWindow.getText().isEmpty()){
+                    newUser.setPassword(currentPasswordWindow.getText());
+                }
+            }
+            if(checkPassword(enterToAcceptChanges,currentUser)){
+                UserJdbcHelper userJdbcHelper1;
+                userJdbcHelper1 =new UserJdbcHelper();
+                userJdbcHelper1.updateUser(newUser);
+
+                popupWindow.close();
+            }
+
         });
         Button exitButton=new Button("Exit");
-        exitButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                popupWindow.close();
-
-            }
-        });
+        exitButton.setOnAction(event -> popupWindow.close());
         layout.getChildren().addAll(currentLogin,currentLoginWindow,currentEmail, currentEmailWindow,currentPassword,currentPasswordWindow,saveButton,exitButton);
         layout.setAlignment(Pos.CENTER);
         Scene scene1= new Scene(layout, 600, 350);

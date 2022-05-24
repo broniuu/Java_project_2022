@@ -10,11 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.User;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import static windowCreators.CrateSettingsWindows.*;
 
 public class SettingController implements Initializable {
@@ -32,16 +33,12 @@ public class SettingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("menu.fxml"));
-        fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
-            @Override
-            public Object call(Class<?> param) {
-                return menuController = new MenuController();
-            }
-        });
+        fxmlLoader.setControllerFactory(param -> menuController = new MenuController());
         Node view = null;
         try {
-            view = (Node) fxmlLoader.load();
+            view = fxmlLoader.load();
         } catch (IOException ex) {
+            ex.printStackTrace();
         }
         topPane.getChildren().add(view);
     }

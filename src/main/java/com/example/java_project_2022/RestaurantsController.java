@@ -2,7 +2,6 @@ package com.example.java_project_2022;
 
 import databaseConnection.DishJdbcHelper;
 import databaseConnection.RestaurantJdbcHelper;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -11,13 +10,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.Dish;
 import model.Restaurant;
 import model.User;
@@ -29,14 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class RestaurantsController implements Initializable {
-   
-    public Button plusButton;
-    public Button minusButton;
     int numberOfRows=3;
-    public Label priceLabel;
-    public Label nameLabel;
-    public Label quantityLabel;
-    public int quantity= 0;
     public Pane topRestaurantsPane;
     public BorderPane BorderPaneRestaurants;
     public AnchorPane centerPane;
@@ -47,19 +37,7 @@ public class RestaurantsController implements Initializable {
         controller.iniCurrentUser(currentUser);
     }
 
-    public void minus(ActionEvent event) {
-        if(quantity>0){
-            quantity--;
-        }
-        quantityLabel.setText(" "+quantity+" ");
-    }
 
-    public void plus(ActionEvent event) {
-        if(quantity<99){
-            quantity++;
-        }
-        quantityLabel.setText(" "+quantity+" ");
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         RestaurantJdbcHelper restaurantsJdbcHelper = new RestaurantJdbcHelper();
@@ -69,7 +47,6 @@ public class RestaurantsController implements Initializable {
         System.out.println(restaurants.get(2).getName()+"   "+restaurants.get(2).getImageUrl());
         GridPane restaurantLayout=new GridPane();
         restaurantLayout.setGridLinesVisible(true);
-        RestaurantDishConnector restaurantDishConnector = new RestaurantDishConnector();
         RestaurantDishConnector.fillRestaurantsWithDishes(restaurants, dishes);
         int i=0;int j=0;
         for (Restaurant r:restaurants) {
@@ -86,15 +63,10 @@ public class RestaurantsController implements Initializable {
         }
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("menu.fxml"));
-        fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
-            @Override
-            public Object call(Class<?> param) {
-                return controller = new MenuController();
-            }
-        });
+        fxmlLoader.setControllerFactory(param -> controller = new MenuController());
         Node view = null;
         try {
-            view = (Node) fxmlLoader.load();
+            view = fxmlLoader.load();
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -132,16 +104,13 @@ public class RestaurantsController implements Initializable {
         ImageView view = new ImageView(im);
 
         view.resize(400,300);
-        vbox.setOnMouseClicked(new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                try {
-                    goToDishes(event,restaurant);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+        vbox.setOnMouseClicked((EventHandler) event -> {
+            try {
+                goToDishes(event,restaurant);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
         });
 
         nameLabel.setText(restaurant.getName());

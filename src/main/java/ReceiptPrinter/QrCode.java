@@ -18,7 +18,7 @@ public final class QrCode {
     public static BufferedImage createQR(String data, String charset, int height, int width)
             throws WriterException, IOException
     {
-        Map<EncodeHintType, ErrorCorrectionLevel> hashMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+        Map<EncodeHintType, ErrorCorrectionLevel> hashMap = new HashMap<>();
 
         hashMap.put(EncodeHintType.ERROR_CORRECTION,
                 ErrorCorrectionLevel.L);
@@ -34,7 +34,6 @@ public final class QrCode {
     public static byte[] convertToByteArray(BufferedImage bi ) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(bi, "png", baos);
-        byte [] image=baos.toByteArray();
-        return image ;
+        return baos.toByteArray();
     }
 }

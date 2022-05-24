@@ -4,7 +4,6 @@ import com.google.zxing.WriterException;
 import databaseConnection.CardItemJdbcHelper;
 import databaseConnection.DishJdbcHelper;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -17,7 +16,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.CartItem;
 import model.Dish;
 import model.User;
@@ -36,10 +34,10 @@ import static windowCreators.SummaryWindowCreator.thanksNote;
 
 public class SummaryController implements Initializable {
     public Pane topSummaryPane;
-    public ListView SummaryList;
+    public ListView<HBox> SummaryList;
     public Label priceLabel;
     public BorderPane BPane;
-    public ChoiceBox deliveryBox;
+    public ChoiceBox<String> deliveryBox;
     public HBox bottomPane;
     CardItemJdbcHelper cardItemJdbcHelper;
     User currentUser;
@@ -51,7 +49,7 @@ public class SummaryController implements Initializable {
 
     MenuController menuController;
     private double deliveryFee;
-    private double costOFDelivery=9.99;
+    private final double costOFDelivery=9.99;
 
     public void iniCurrentUser(User currentUser){
         this.currentUser=currentUser;
@@ -76,17 +74,13 @@ public class SummaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("menu.fxml"));
-        fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
-            @Override
-            public Object call(Class<?> param) {
-                return menuController = new MenuController();
-            }
-        });
+        fxmlLoader.setControllerFactory(param -> menuController = new MenuController());
         Node view = null;
         try {
-            view = (Node) fxmlLoader.load();
+            view = fxmlLoader.load();
 
         } catch (IOException ex) {
+            ex.printStackTrace();
         }
         topSummaryPane.getChildren().add(view);
         deliveryBox.getItems().add(delivery);
@@ -102,7 +96,6 @@ public class SummaryController implements Initializable {
     public HBox newItemBox(CartItem cartItem){
         cardItemJdbcHelper=new CardItemJdbcHelper();
         final int[] I = {cartItem.getCountOfDish()};
-        FXMLLoader fxmlLoader=new FXMLLoader();
         HBox box =new HBox();
         box.setAlignment(Pos.CENTER);
         box.setSpacing(20);
@@ -111,39 +104,30 @@ public class SummaryController implements Initializable {
 
         Label quntity=new Label(""+I[0]);
         Button plus=new Button("+");
-        plus.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                I[0]++;
-                cartItem.setCountOfDish(I[0]);
-                cardItemJdbcHelper.updateCartItem(cartItem);
-                quntity.setText(""+(I[0]));
-                priceLabel.setText(""+(cartItem.getDish().getPrice()*I[0])+"zl");
-                updatedPrice();
-            }
+        plus.setOnAction(event -> {
+            I[0]++;
+            cartItem.setCountOfDish(I[0]);
+            cardItemJdbcHelper.updateCartItem(cartItem);
+            quntity.setText(""+(I[0]));
+            priceLabel.setText(""+(cartItem.getDish().getPrice()*I[0])+"zl");
+            updatedPrice();
         });
         Button minus=new Button("-");
-        minus.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(I[0] >0){
-                    I[0]--;
-                }
-                cartItem.setCountOfDish(I[0]);
-                cardItemJdbcHelper.updateCartItem(cartItem);
-                quntity.setText(""+(I[0]));
-                priceLabel.setText(""+(cartItem.getDish().getPrice()*I[0])+"zl");
-                updatedPrice();
+        minus.setOnAction(event -> {
+            if(I[0] >0){
+                I[0]--;
             }
+            cartItem.setCountOfDish(I[0]);
+            cardItemJdbcHelper.updateCartItem(cartItem);
+            quntity.setText(""+(I[0]));
+            priceLabel.setText(""+(cartItem.getDish().getPrice()*I[0])+"zl");
+            updatedPrice();
         });
         Button delButton =new Button("delete");
-        delButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                cardItemJdbcHelper.deleteCartItem( cartItem);
+        delButton.setOnAction(event -> {
+            cardItemJdbcHelper.deleteCartItem( cartItem);
 
-                iniSummary();
-            }
+            iniSummary();
         });
         nameLabel.setText(cartItem.getDish().getName());
         priceLabel.setText(""+(cartItem.getDish().getPrice()*I[0]));
@@ -153,7 +137,6 @@ public class SummaryController implements Initializable {
         box.getChildren().add(quntity);
         box.getChildren().add(plus);
         box.getChildren().add(delButton);
-        Scene scene = new Scene(box,900, 540);
         return box;
     }
     public void updatedPrice() {
@@ -195,12 +178,9 @@ public class SummaryController implements Initializable {
             textField.setText(note);
         }
         Button addNote=new Button("Add note");
-        addNote.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                note=textField.getText();
-                popupwindow.close();
-            }
+        addNote.setOnAction(event1 -> {
+            note=textField.getText();
+            popupwindow.close();
         });
         layout.getChildren().addAll(textField, addNote);
         layout.setAlignment(Pos.CENTER);

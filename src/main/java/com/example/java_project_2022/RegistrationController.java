@@ -24,7 +24,7 @@ public class RegistrationController {
     public TextField RCardNumberBox;
     public TextField RCCVBBox;
     public TextField RExpirationDateBox;
-    public ListView RSummaryView;
+    public ListView<String> RSummaryView;
     public TextField RNameBox;
     public TextField RSurnameBox;
     public TextField RStreetBox;

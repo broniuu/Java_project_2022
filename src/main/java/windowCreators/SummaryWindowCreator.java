@@ -1,7 +1,5 @@
 package windowCreators;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,12 +17,7 @@ public class SummaryWindowCreator {
         Label textField=new Label(thankYouMessage+"\n"+emailNotification);
 
         Button closeWindow =new Button("Close Window");
-        closeWindow.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                popupwindow.close();
-            }
-        });
+        closeWindow.setOnAction(event -> popupwindow.close());
         layout.getChildren().addAll(textField, closeWindow);
         layout.setAlignment(Pos.CENTER);
         Scene scene1= new Scene(layout, 300, 250);
