@@ -13,7 +13,7 @@
    <bottom>
    </bottom>
    <bottom>
-      <HBox  alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="40" >
+      <HBox fx:id="bottomPane"  alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="40" >
          <children>
             <Button  mnemonicParsing="false" onAction="#note" text="add note" />
             <ChoiceBox onAction="#Delivery" fx:id="deliveryBox" prefWidth="150.0"  />

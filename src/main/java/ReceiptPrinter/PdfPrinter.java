@@ -29,7 +29,7 @@ public class PdfPrinter {
     public static void makePdf(User currentUser, List<CartItem> cartItems, boolean delivery, String note) throws IOException, WriterException {
         PdfWriter pdfWriter=new PdfWriter(new File("./plik.pdf").getCanonicalPath());
         Random random=new Random();
-        long nr= random.nextLong(2, (long) 123.00);
+        long nr= random.nextInt(123);
 
         com.itextpdf.layout.element.List orders=new com.itextpdf.layout.element.List();
         com.itextpdf.layout.element.List orders2=new com.itextpdf.layout.element.List();

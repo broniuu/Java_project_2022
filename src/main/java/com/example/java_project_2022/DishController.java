@@ -15,8 +15,6 @@ public class DishController {
         dishDescription.setText(dish.getDescription());
         dishImage.setImage(new Image(dish.getImageUrl()));
     }
-    public void ToDishes(){
 
-    }
 
 }

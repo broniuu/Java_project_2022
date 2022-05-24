@@ -107,25 +107,24 @@ public class UserJdbcHelper {
             if(resultSet.getString(1).equals(login) && resultSet.getString(2).equals(password)){
                 dbConnector.close();
                 return true;
-
             }
         }
         return false;
     }
-    public int getId(String login,String password) throws SQLException {
-        int id=-1;
+    public boolean isLoginFree(String login) throws SQLException {
         DbConnector dbConnector=new DbConnector();
-        Connection connection= dbConnector.getConnection();
-        ResultSet resultSet=connection.createStatement().executeQuery("SELECT UserId,Login,Password FROM Users");
-        while (resultSet.next()){
-            if(resultSet.getString(2).equals(login) && resultSet.getString(3).equals(password)){
 
-                id= resultSet.getInt(1);
+        Connection connection= dbConnector.getConnection();
+        ResultSet resultSet=connection.createStatement().executeQuery("SELECT Login,Password FROM Users");
+        while (resultSet.next()){
+            if(resultSet.getString(1).equals(login)){
+                dbConnector.close();
+                return false;
             }
         }
-        dbConnector.close();
-        return id;
+        return true;
     }
+
 
     public boolean updateUser(User user){
         DbConnector dbConnector = new DbConnector();

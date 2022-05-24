@@ -32,7 +32,7 @@ public class RestaurantsController implements Initializable {
    
     public Button plusButton;
     public Button minusButton;
-
+    int numberOfRows=3;
     public Label priceLabel;
     public Label nameLabel;
     public Label quantityLabel;
@@ -74,9 +74,9 @@ public class RestaurantsController implements Initializable {
         int i=0;int j=0;
         for (Restaurant r:restaurants) {
             try {
-                restaurantLayout.add(newStage(r),j,i);
+                restaurantLayout.add(newRestaurantStage(r),j,i);
                 j++;
-                if(j>=3){
+                if(j>=numberOfRows){
                     j=0;
                     i++;
                 }
@@ -97,6 +97,7 @@ public class RestaurantsController implements Initializable {
             view = (Node) fxmlLoader.load();
 
         } catch (IOException ex) {
+            ex.printStackTrace();
         }
         centerPane.getChildren().add(restaurantLayout);
         topRestaurantsPane.getChildren().add(view);
@@ -112,14 +113,14 @@ public class RestaurantsController implements Initializable {
         dishesController.iniDishes(restaurant.getDishes());
         dishesController.iniCurrentUser(currentUser);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root,1070,560);;
+        Scene scene=new Scene(root,1070,560);
 
 
         stage.setScene(scene);
         stage.show();
     }
 
-    public VBox newStage(Restaurant restaurant) throws IOException {
+    public VBox newRestaurantStage(Restaurant restaurant) throws IOException {
         VBox vbox =new VBox();
         HBox hbox =new HBox();
         vbox.setAlignment(Pos.CENTER);

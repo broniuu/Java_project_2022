@@ -9,12 +9,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.regex.Pattern;
+
+import static model.Validators.*;
+import static windowCreators.SnackBarCreator.showSnackBar;
 
 public class RegistrationController {
 
@@ -31,12 +34,21 @@ public class RegistrationController {
     public TextField RLogin;
     public PasswordField RPassword;
     public PasswordField RReapeatPassword;
-    private Pattern validEmailPattern=Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
-
+    public TextField RCity;
+    public AnchorPane rootPane;
+    String incorrectPassword="Your password needs to have at least 1 big Letter, 1 number and 1 special character ";
+    String notIdenticalPasswords="Your Passwords are not identical ";
+    String incorrectLogin ="this login already exists";
+    String invalidEmail="This Email Isn't valid";
+    String invalidCvv="Correct ccv format is xxx";
+    String invalidPostCode="Correct postCode format is xx-xxx";
+    String invalidCard="Debit Card is not valid";
+    String expireDate="Correct expire date format is xx/xx";
     public void addToList(Event event) {
-        String passes ="login: "+RLogin.getText()+",password "+RPassword.getText()+",Email: "+REmail.getText();
+        RSummaryView.getItems().clear();
+        String passes ="login: "+RLogin.getText()+"password "+RPassword.getText()+"Email:"+REmail.getText();
         String name ="Personals: "+RNameBox.getText()+" "+RSurnameBox.getText();
-        String adress="Adress: "+RStreetBox.getText()+" "+RHomeNumberBox.getText()+" "+RPostCodeBox.getText();
+        String adress="Adress: "+RCity.getText()+","+RStreetBox.getText()+","+RHomeNumberBox.getText()+","+RPostCodeBox.getText();
         String cardInfo="CardNumber "+RCardNumberBox.getText()+" CCV: "+RCCVBBox.getText()+" Expiration Date: "+RExpirationDateBox.getText();
         if(RSummaryView.getItems().isEmpty()){
             RSummaryView.getItems().add(passes);
@@ -50,19 +62,26 @@ public class RegistrationController {
             RSummaryView.getItems().add(adress);
             RSummaryView.getItems().add(cardInfo);
         }
-
     }
     public void register(ActionEvent event) throws SQLException, IOException {
+        String address=""+RCity.getText()+","+RStreetBox.getText()+","+RHomeNumberBox.getText()+","+RPostCodeBox.getText();
+
+
         UserJdbcHelper userJdbcHelper=new UserJdbcHelper();
-        if(!RPassword.getText().equals(RReapeatPassword.getText()))return;
-        if(userJdbcHelper.checkUser(RLogin.getText(),RPassword.getText()))return;
-        if(!emailValidation())return;
+        if(!passwordValidator(RPassword.getText())) {showSnackBar(rootPane,incorrectPassword);return;}
+        if(!RPassword.getText().equals(RReapeatPassword.getText())){showSnackBar(rootPane,notIdenticalPasswords);return;}
+        if(!userJdbcHelper.isLoginFree(RLogin.getText())){showSnackBar(rootPane,incorrectLogin);return;}
+        if(!emailValidator(REmail.getText()) ){showSnackBar(rootPane,invalidEmail);return;}
+        if(!cvvValidator(RCCVBBox.getText())){showSnackBar(rootPane,invalidCvv);return;}
+        if(!postCodeValidator(RPostCodeBox.getText())){showSnackBar(rootPane,invalidPostCode);return;}
+        if(!debitCardValidator(RCardNumberBox.getText())){showSnackBar(rootPane,invalidCard);return;}
+        if(!expireDateValidator(RExpirationDateBox.getText())){showSnackBar(rootPane,expireDate);return;}
+
         if(RPostCodeBox.getText().isEmpty()&&RCCVBBox.getText().isEmpty()&&RStreetBox.getText().isEmpty()&&RHomeNumberBox.getText().isEmpty()
                 &&RNameBox.getText().isEmpty()&&RSurnameBox.getText().isEmpty()&&RPassword.getText().isEmpty()&&RReapeatPassword.getText().isEmpty()&&RCardNumberBox.getText().isEmpty()&&
                 RExpirationDateBox.getText().isEmpty())return;
 
-        String adress=""+RStreetBox.getText()+" "+RHomeNumberBox.getText()+" "+RPostCodeBox.getText();
-        User user=new User(RLogin.getText(),RPassword.getText(),RNameBox.getText(),RSurnameBox.getText(),adress,RCardNumberBox.getText(),RExpirationDateBox.getText(),RCCVBBox.getText(),REmail.getText());
+        User user=new User(RLogin.getText(),RPassword.getText(),RNameBox.getText(),RSurnameBox.getText(),address,RCardNumberBox.getText(),RExpirationDateBox.getText(),RCCVBBox.getText(),REmail.getText());
         userJdbcHelper.addUser(user);
         gotoLogin(event);
     }
@@ -75,14 +94,6 @@ public class RegistrationController {
         stage.show();
     }
 
-    public boolean emailValidation(){
-        String s= REmail.getText();
-        if(validEmailPattern.matcher(s).matches()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+
 
 }

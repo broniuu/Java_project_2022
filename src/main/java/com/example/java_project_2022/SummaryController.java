@@ -31,6 +31,8 @@ import java.util.ResourceBundle;
 
 import static ReceiptPrinter.PdfPrinter.makePdf;
 import static service.MailService.sendEmail;
+import static windowCreators.SnackBarCreator.showSnackBar;
+import static windowCreators.SummaryWindowCreator.thanksNote;
 
 public class SummaryController implements Initializable {
     public Pane topSummaryPane;
@@ -38,12 +40,15 @@ public class SummaryController implements Initializable {
     public Label priceLabel;
     public BorderPane BPane;
     public ChoiceBox deliveryBox;
+    public HBox bottomPane;
     CardItemJdbcHelper cardItemJdbcHelper;
     User currentUser;
     String delivery="Delivery";
     String takeaway="Takeaway";
     List<CartItem> cartItems;
     String note="";
+    String thankYouMessage="Thank you For Buying with Szama(n)!!";
+
     MenuController menuController;
     private double deliveryFee;
     private double costOFDelivery=9.99;
@@ -54,9 +59,9 @@ public class SummaryController implements Initializable {
     }
     public  void clear(){
         SummaryList.getItems().clear();
+        cartItems.clear();
     }
     public void iniSummary(){
-
         DishJdbcHelper dishJdbcHelper=new DishJdbcHelper();
         List<HBox> boxes =new ArrayList<>();
         cartItems= getItems();
@@ -136,7 +141,7 @@ public class SummaryController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 cardItemJdbcHelper.deleteCartItem( cartItem);
-                clear();
+
                 iniSummary();
             }
         });
@@ -148,7 +153,6 @@ public class SummaryController implements Initializable {
         box.getChildren().add(quntity);
         box.getChildren().add(plus);
         box.getChildren().add(delButton);
-
         Scene scene = new Scene(box,900, 540);
         return box;
     }
@@ -159,45 +163,30 @@ public class SummaryController implements Initializable {
             for (CartItem item:cartItems) {
                 sum+=(item.getDish().getPrice()*item.getCountOfDish());
             }
-            priceLabel.setText(""+(sum+deliveryFee)+"zl");
+            priceLabel.setText((sum+deliveryFee)+"zl");
         }
 
     }
     public void Order(ActionEvent event) throws IOException, WriterException {
         //dodać drukowanie paragonu
-        if(deliveryBox.getValue() == null) return;
+        if(deliveryBox.getValue() == null){showSnackBar(bottomPane,"Choose your delivery method"); return;}
+        if(cartItems.isEmpty()) {showSnackBar(bottomPane,"your Cart is empty."); return;}
         //oprożnić koszyk
+        cardItemJdbcHelper=new CardItemJdbcHelper();
+
         for (CartItem item: cartItems) {
-            cardItemJdbcHelper=new CardItemJdbcHelper();
             cardItemJdbcHelper.deleteCartItem(item);
         }
         makePdf(currentUser,cartItems,deliveryBox.getValue().equals(delivery),note);
-        //wyswietlic podziekowanie za zakup
-        thanksnote();
+        cartItems.clear();
         clear();
         iniSummary();
-        sendEmail(currentUser.getEmail(),"Receipt for "+currentUser.getLogin(),"Thank you for Buying with Szama(n)");
+        //wyswietlic podziekowanie za zakup
+        thanksNote();
+        sendEmail(currentUser.getEmail(),"Receipt for "+currentUser.getLogin(),thankYouMessage);
     }
 
-    public void thanksnote() {
-        Stage popupwindow=new Stage();
-        VBox layout= new VBox(10);
-        Label textField=new Label("Thank you For Buying with Szama(n)!!");
 
-        Button closeWinow=new Button("Close Window");
-        closeWinow.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                popupwindow.close();
-            }
-        });
-        layout.getChildren().addAll(textField, closeWinow);
-        layout.setAlignment(Pos.CENTER);
-        Scene scene1= new Scene(layout, 300, 250);
-        popupwindow.initModality(Modality.APPLICATION_MODAL);
-        popupwindow.setScene(scene1);
-        popupwindow.showAndWait();
-    }
     public void note(ActionEvent event) {
         Stage popupwindow=new Stage();
         VBox layout= new VBox(10);

@@ -12,6 +12,7 @@ module java {
     requires layout;
     requires org.apache.logging.log4j.slf4j;
     requires java.mail;
+    requires com.jfoenix;
 
     opens model to javafx.base, javafx.fxml;
     opens com.example.java_project_2022 to javafx.base, javafx.fxml;
