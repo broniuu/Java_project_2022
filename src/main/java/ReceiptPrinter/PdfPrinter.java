@@ -22,7 +22,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-import static ReceiptPrinter.QrCode.getImageAsByteArray;
+
+import static ReceiptPrinter.ImageConverters.getImageAsByteArray;
 import static com.itextpdf.kernel.geom.PageSize.A4;
 
 public class PdfPrinter {
@@ -89,12 +90,8 @@ public class PdfPrinter {
                 .setMarginBottom(30f)
                 .setFontSize(30f).setBorder(Border.NO_BORDER)
                 .setFontColor(Color.WHITE));
-
-
         Table customerOrder=new Table(columnWidth);
         customerOrder.setBorder(Border.NO_BORDER).setFontSize(12);
-
-
         Table summary=new Table(columnWidth);
         summary.setBackgroundColor(new DeviceRgb(65,123,243));
         summary.addCell(new Cell()

@@ -16,6 +16,7 @@ import model.User;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import static com.example.java_project_2022.Dictionary.*;
 import static model.Validators.*;
 import static windowCreators.SnackBarCreator.showSnackBar;
 
@@ -36,16 +37,10 @@ public class RegistrationController {
     public PasswordField RReapeatPassword;
     public TextField RCity;
     public AnchorPane rootPane;
-    String incorrectPassword="Your password needs to have at least 1 big Letter, 1 number and 1 special character ";
-    String notIdenticalPasswords="Your Passwords are not identical ";
-    String incorrectLogin ="this login already exists";
-    String invalidEmail="This Email Isn't valid";
-    String invalidCvv="Correct ccv format is xxx";
-    String invalidPostCode="Correct postCode format is xx-xxx";
-    String invalidCard="Debit Card is not valid";
-    String expireDate="Correct expire date format is xx/xx";
+
     public void addToList(Event event) {
         RSummaryView.getItems().clear();
+
         String passes ="login: "+RLogin.getText()+"password "+RPassword.getText()+"Email:"+REmail.getText();
         String name ="Personals: "+RNameBox.getText()+" "+RSurnameBox.getText();
         String adress="Adress: "+RCity.getText()+","+RStreetBox.getText()+","+RHomeNumberBox.getText()+","+RPostCodeBox.getText();

@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
 import javafx.stage.Stage;
 import model.User;
-
 import java.io.IOException;
 
 public class MenuController {

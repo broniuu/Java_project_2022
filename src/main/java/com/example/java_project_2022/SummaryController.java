@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static ReceiptPrinter.PdfPrinter.makePdf;
+import static com.example.java_project_2022.Dictionary.*;
 import static service.MailService.sendEmail;
 import static windowCreators.SnackBarCreator.showSnackBar;
 import static windowCreators.SummaryWindowCreator.thanksNote;
@@ -41,11 +42,10 @@ public class SummaryController implements Initializable {
     public HBox bottomPane;
     CardItemJdbcHelper cardItemJdbcHelper;
     User currentUser;
-    String delivery="Delivery";
-    String takeaway="Takeaway";
+
     List<CartItem> cartItems;
     String note="";
-    String thankYouMessage="Thank you For Buying with Szama(n)!!";
+
 
     MenuController menuController;
     private double deliveryFee;
@@ -152,8 +152,8 @@ public class SummaryController implements Initializable {
     }
     public void Order(ActionEvent event) throws IOException, WriterException {
         //dodać drukowanie paragonu
-        if(deliveryBox.getValue() == null){showSnackBar(bottomPane,"Choose your delivery method"); return;}
-        if(cartItems.isEmpty()) {showSnackBar(bottomPane,"your Cart is empty."); return;}
+        if(deliveryBox.getValue() == null){showSnackBar(bottomPane,deliveryMethod); return;}
+        if(cartItems.isEmpty()) {showSnackBar(bottomPane,emptyCart); return;}
         //oprożnić koszyk
         cardItemJdbcHelper=new CardItemJdbcHelper();
 
@@ -177,7 +177,7 @@ public class SummaryController implements Initializable {
         if(!note.isEmpty()){
             textField.setText(note);
         }
-        Button addNote=new Button("Add note");
+        Button addNote=new Button(Dictionary.addNote);
         addNote.setOnAction(event1 -> {
             note=textField.getText();
             popupwindow.close();
@@ -186,7 +186,7 @@ public class SummaryController implements Initializable {
         layout.setAlignment(Pos.CENTER);
         Scene scene1= new Scene(layout, 300, 250);
         popupwindow.initModality(Modality.APPLICATION_MODAL);
-        popupwindow.setTitle("Add note for chief / Delivery service");
+        popupwindow.setTitle(noteForChief);
         popupwindow.setScene(scene1);
         popupwindow.showAndWait();
     }

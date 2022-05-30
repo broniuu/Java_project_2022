@@ -11,33 +11,26 @@ import javafx.util.Duration;
 
 public class SnackBarCreator {
     public static void showSnackBar(AnchorPane rootPane , String messageText){
-        JFXSnackbar snackbar;
-        snackbar =new JFXSnackbar(rootPane);
-        Label message=new Label(messageText);
-        message.setTextFill(Color.WHITE);
-        message.setBackground(Background.fill(Color.BLACK));
-        message.setStyle("-fx-font-size:24");
-        final JFXSnackbar.SnackbarEvent snackbarEvent = new JFXSnackbar.SnackbarEvent(message, Duration.seconds(3.33), null);
-        snackbar.enqueue(snackbarEvent);
+        JFXSnackbar snackBar;
+        snackBar =new JFXSnackbar(rootPane);
+        crateSnackBar(snackBar,messageText);
     }
     public static void showSnackBar(HBox rootPane , String messageText){
-        JFXSnackbar snackbar;
-        snackbar =new JFXSnackbar(rootPane);
-        Label message=new Label(messageText);
-        message.setTextFill(Color.WHITE);
-        message.setBackground(Background.fill(Color.BLACK));
-        message.setStyle("-fx-font-size:24");
-        final JFXSnackbar.SnackbarEvent snackbarEvent = new JFXSnackbar.SnackbarEvent(message, Duration.seconds(3.33), null);
-        snackbar.enqueue(snackbarEvent);
+        JFXSnackbar snackBar;
+        snackBar =new JFXSnackbar(rootPane);
+        crateSnackBar(snackBar,messageText);
     }
     public static void showSnackBar(VBox rootPane , String messageText){
-        JFXSnackbar snackbar;
-        snackbar =new JFXSnackbar(rootPane);
+        JFXSnackbar snackBar;
+        snackBar =new JFXSnackbar(rootPane);
+        crateSnackBar(snackBar,messageText);
+    }
+    public static void crateSnackBar(JFXSnackbar snackBar, String  messageText){
         Label message=new Label(messageText);
         message.setTextFill(Color.WHITE);
         message.setBackground(Background.fill(Color.BLACK));
         message.setStyle("-fx-font-size:24");
-        final JFXSnackbar.SnackbarEvent snackbarEvent = new JFXSnackbar.SnackbarEvent(message, Duration.seconds(3.33), null);
-        snackbar.enqueue(snackbarEvent);
+        final JFXSnackbar.SnackbarEvent snackBarEvent = new JFXSnackbar.SnackbarEvent(message, Duration.seconds(3.33), null);
+        snackBar.enqueue(snackBarEvent);
     }
 }

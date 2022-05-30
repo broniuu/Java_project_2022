@@ -16,12 +16,14 @@ import windowCreators.SnackBarCreator;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import static com.example.java_project_2022.Dictionary.incorrectLoginOrPassword;
+
 public class LoginController {
     public TextField passwordBox;
     public TextField loginBox;
     public Button loginButton;
     public VBox rootPane;
-    String incorrectLogin="Incorrect login or password";
+    String incorrectLogin=incorrectLoginOrPassword;
     public void Login(ActionEvent event) throws IOException, SQLException {
         UserJdbcHelper userJdbcHelper = new UserJdbcHelper();
         if (userJdbcHelper.checkUser(loginBox.getText(), passwordBox.getText())) {

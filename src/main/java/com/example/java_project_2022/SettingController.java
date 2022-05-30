@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.example.java_project_2022.Dictionary.deleteAccount;
 import static windowCreators.CrateSettingsWindows.*;
 
 public class SettingController implements Initializable {
@@ -51,7 +52,7 @@ public class SettingController implements Initializable {
     }
 
     public void deleteAccount(ActionEvent event) throws IOException {
-        if(checkPassword("If you want To delete your account, enter your password",currentUser)){
+        if(checkPassword(deleteAccount,currentUser)){
             if(userJdbcHelper==null)userJdbcHelper=new UserJdbcHelper();
             userJdbcHelper.deleteUser(currentUser);
             logOut(event);
