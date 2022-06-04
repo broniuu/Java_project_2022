@@ -3,15 +3,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1070.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.RegistrationController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1070.0" stylesheets="/style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.RegistrationController">
   <tabs>
     <Tab text="Login Information">
       <content>
-        <AnchorPane  minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <VBox  alignment="CENTER" layoutX="124.0" layoutY="14.0" prefHeight="353.0" prefWidth="837.0">
+                  <VBox alignment="CENTER" layoutX="124.0" layoutY="14.0" prefHeight="353.0" prefWidth="837.0">
                      <children>
-                        <VBox  prefHeight="200.0" prefWidth="100.0">
+                        <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <Label alignment="CENTER_LEFT" text="Login" />
                               <TextField fx:id="RLogin" alignment="CENTER" />
@@ -85,9 +85,9 @@
               <AnchorPane fx:id="rootPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
 
-                  <Button layoutX="534.0" layoutY="332.0" mnemonicParsing="false" onAction="#register" text="Register" />
+                  <Button layoutX="504.0" layoutY="314.0" mnemonicParsing="false" onAction="#register" prefHeight="43.0" prefWidth="94.0" text="Register" />
                   <Label layoutX="280.0" layoutY="177.0" text="Label" />
-                  <ListView fx:id="RSummaryView" fixedCellSize="60.0" layoutX="4.0" layoutY="50.0" prefHeight="246.0" prefWidth="1059.0" />
+                  <ListView fx:id="RSummaryView" fixedCellSize="60.0" layoutX="4.0" layoutY="50.0" prefHeight="246.0" prefWidth="1059.0" stylesheets="/list_style.css" />
                   </children></AnchorPane>
           </content>
 

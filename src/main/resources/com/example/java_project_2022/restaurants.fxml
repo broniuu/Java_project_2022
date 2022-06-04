@@ -3,12 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="BorderPaneRestaurants" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.RestaurantsController">
+<BorderPane stylesheets="/style.css" fx:id="BorderPaneRestaurants" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.RestaurantsController">
    <top>
-      <Pane fx:id="topRestaurantsPane" prefHeight="60.0" prefWidth="700.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="topRestaurantsPane" prefHeight="60.0" prefWidth="1100.0" BorderPane.alignment="CENTER" />
    </top>
    <center>
-      <ScrollPane  prefHeight="278.0" prefWidth="658.0" BorderPane.alignment="CENTER">
+      <ScrollPane stylesheets="/style.css" prefHeight="278.0" prefWidth="658.0" BorderPane.alignment="CENTER">
         <content>
           <AnchorPane  fx:id="centerPane" minHeight="0.0" minWidth="0.0"  />
         </content>

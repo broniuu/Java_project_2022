@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 import model.User;
 import java.io.IOException;
 
+import static com.example.java_project_2022.Dictionary.HEIGHT;
+import static com.example.java_project_2022.Dictionary.WIDTH;
+
 public class MenuController {
     public Label currentNameLabel;
     public User currentUser;
@@ -23,7 +26,7 @@ public class MenuController {
         SettingController settingController =fxmlLoader.getController();
         settingController.iniCurrentUser(currentUser);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root,1070,560);
+        Scene scene=new Scene(root,WIDTH,HEIGHT);
 
         stage.setScene(scene);
         stage.show();
@@ -40,7 +43,7 @@ public class MenuController {
         RestaurantsController restaurantsController =fxmlLoader.getController();
         restaurantsController.iniCurrentUser(currentUser);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root,1070,560);
+        Scene scene=new Scene(root,WIDTH,HEIGHT);
 
 
         stage.setScene(scene);
@@ -55,7 +58,7 @@ public class MenuController {
         summaryController.iniCurrentUser(currentUser);
         summaryController.iniSummary();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root,1070,560);
+        Scene scene=new Scene(root,WIDTH,HEIGHT);
 
 
         stage.setScene(scene);

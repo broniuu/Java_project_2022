@@ -1,0 +1,17 @@
+.tool-bar{
+ -fx-background-color:#434343;
+}
+.button{
+    -fx-background-color:"black";
+    -fx-background-position: center center;
+    -fx-text-fill: "white";
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+}
+
+.label {
+    -fx-background-color:null;
+    -fx-text-fill: "black";
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+}

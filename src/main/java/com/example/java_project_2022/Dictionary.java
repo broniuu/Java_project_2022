@@ -19,4 +19,6 @@ public class Dictionary {
     static String deleteAccount="If you want To delete your account, enter your password";
     static String incorrectLoginOrPassword="Incorrect login or password";
 
+    static int HEIGHT =560;
+    static int WIDTH =1100;
 }

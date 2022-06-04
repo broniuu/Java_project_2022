@@ -16,7 +16,7 @@ import windowCreators.SnackBarCreator;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import static com.example.java_project_2022.Dictionary.incorrectLoginOrPassword;
+import static com.example.java_project_2022.Dictionary.*;
 
 public class LoginController {
     public TextField passwordBox;
@@ -42,7 +42,8 @@ public class LoginController {
                 restaurantsController.iniCurrentUser(currentUser);
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root, 1070, 560);
+                Scene scene = new Scene(root, WIDTH, HEIGHT);
+
                 stage.setScene(scene);
                 stage.show();
             }
@@ -55,7 +56,7 @@ public class LoginController {
     public void gotoRegister(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1070, 560);
+        Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();

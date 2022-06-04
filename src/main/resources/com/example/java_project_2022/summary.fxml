@@ -5,7 +5,7 @@
 
 <BorderPane fx:id="BPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.SummaryController">
    <center>
-      <ListView fx:id="SummaryList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ListView stylesheets="/list_style.css" fx:id="SummaryList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
       <Pane fx:id="topSummaryPane" prefHeight="60.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
@@ -13,7 +13,7 @@
    <bottom>
    </bottom>
    <bottom>
-      <HBox fx:id="bottomPane"  alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="40" >
+      <HBox stylesheets="/menu_style.css" fx:id="bottomPane"  alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="40" >
          <children>
             <Button  mnemonicParsing="false" onAction="#note" text="add note" />
             <ChoiceBox onAction="#Delivery" fx:id="deliveryBox" prefWidth="150.0"  />

@@ -25,6 +25,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static com.example.java_project_2022.Dictionary.HEIGHT;
+import static com.example.java_project_2022.Dictionary.WIDTH;
+
 public class RestaurantsController implements Initializable {
     int numberOfRows=3;
     public Pane topRestaurantsPane;
@@ -71,7 +74,13 @@ public class RestaurantsController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+        restaurantLayout.setStyle("  -fx-padding: 10;\n" +
+                "    -fx-hgap: 10;\n" +
+                "    -fx-vgap: 10;" +
+                " -fx-background-image: url(\"/pattern1.jpg\");");
         centerPane.getChildren().add(restaurantLayout);
+
         topRestaurantsPane.getChildren().add(view);
 
     }
@@ -85,9 +94,7 @@ public class RestaurantsController implements Initializable {
         dishesController.iniDishes(restaurant.getDishes());
         dishesController.iniCurrentUser(currentUser);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root,1070,560);
-
-
+        Scene scene=new Scene(root,WIDTH,HEIGHT);
         stage.setScene(scene);
         stage.show();
     }
@@ -119,6 +126,7 @@ public class RestaurantsController implements Initializable {
 
         vbox.getChildren().add(view);
         vbox.getChildren().add(hbox);
+        vbox.setStyle(" -fx-background-color: white");
         return vbox;
     }
 }
