@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox stylesheets="/style.css" fx:id="rootPane" alignment="CENTER" prefHeight="473.0" prefWidth="480.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.LoginController">
+<VBox stylesheets="/style.css" fx:id="rootPane" alignment="CENTER" prefHeight="473.0" prefWidth="480.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.Controlers.LoginController">
 
    <Label text="Login" />
    <TextField fx:id="loginBox" layoutX="30.0" layoutY="230.0" prefHeight="25.0" prefWidth="368.0" />

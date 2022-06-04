@@ -1,4 +1,12 @@
 package com.example.java_project_2022;
+/**
+ *
+ * Date 04.06.2022
+ * Aplikacja ta symuluje kupowanie posiłków z różnych restauracji
+ * @author Kamil Martyka, Jakub Chochołowicz, Filip Broniek
+ *
+ */
+
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

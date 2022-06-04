@@ -1,6 +1,5 @@
 
-module java {
-
+module java.com.example.java_project_2022 {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
@@ -14,8 +13,9 @@ module java {
     requires java.mail;
     requires com.jfoenix;
 
-    opens model to javafx.base, javafx.fxml;
-    opens com.example.java_project_2022 to javafx.base, javafx.fxml;
+    opens com.example.java_project_2022 to  javafx.fxml;
 
     exports com.example.java_project_2022;
+    exports com.example.java_project_2022.Controlers;
+    opens com.example.java_project_2022.Controlers to javafx.fxml;
 }

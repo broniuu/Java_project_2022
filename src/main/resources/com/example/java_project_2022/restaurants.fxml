@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane stylesheets="/style.css" fx:id="BorderPaneRestaurants" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.RestaurantsController">
+<BorderPane stylesheets="/style.css" fx:id="BorderPaneRestaurants" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project_2022.Controlers.RestaurantsController">
    <top>
       <Pane fx:id="topRestaurantsPane" prefHeight="60.0" prefWidth="1100.0" BorderPane.alignment="CENTER" />
    </top>
