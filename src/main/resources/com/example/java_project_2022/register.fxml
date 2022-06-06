@@ -16,7 +16,7 @@
                               <Label alignment="CENTER_LEFT" text="Login" />
                               <TextField fx:id="RLogin" alignment="CENTER" />
                               <Label alignment="CENTER" text="Password" />
-                              <PasswordField fx:id="RPassword" />
+                              <PasswordField fx:id="RPassword"  alignment="CENTER"/>
                               <Label alignment="CENTER" text="Reapeat Password"  />
                               <PasswordField fx:id="RReapeatPassword"   alignment="CENTER" />
                               <Label alignment="CENTER" text="Email" />

@@ -118,14 +118,12 @@ public class DishesController implements Initializable {
         addButton.setOnAction(event -> {
             if(Quantity[0] >0){
                 CartItem cartItem=new CartItem(currentUser.getUserId(),dish.getDishId(), Quantity[0]);
-                System.out.println(dish.getDishId());
                 CartItemJdbcHelper CIH=new CartItemJdbcHelper();
                 CIH.upsertCartItem(cartItem);
                 Quantity[0]=0;
                 quntityLabel.setText(""+(Quantity[0]));
             }
         });
-
         box.setOnMouseClicked(mouseEvent -> {
             if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                 if(mouseEvent.getClickCount() == 2){
@@ -137,7 +135,6 @@ public class DishesController implements Initializable {
                 }
             }
         });
-
         addButton.setText("Add");
         nameLabel.setText(dish.getName());
         nameLabel.setMinSize(220,20);
