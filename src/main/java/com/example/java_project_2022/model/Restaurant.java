@@ -2,6 +2,11 @@ package com.example.java_project_2022.model;
 
 import java.util.List;
 
+/**
+ * Klasa reprezentuje restaurację
+ */
+
+
 public class Restaurant {
     private int restaurantId;
     private String name;

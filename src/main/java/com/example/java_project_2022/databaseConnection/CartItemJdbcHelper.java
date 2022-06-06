@@ -1,7 +1,7 @@
 package com.example.java_project_2022.databaseConnection;
 
 import com.example.java_project_2022.model.CartItem;
-import com.example.java_project_2022.model.CartItemComparator;
+import com.example.java_project_2022.comparators.CartItemComparator;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

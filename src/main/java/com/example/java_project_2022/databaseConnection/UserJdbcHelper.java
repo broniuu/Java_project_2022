@@ -1,7 +1,7 @@
 package com.example.java_project_2022.databaseConnection;
 
 import com.example.java_project_2022.model.User;
-import com.example.java_project_2022.model.UserComparator;
+import com.example.java_project_2022.comparators.UserComparator;
 
 import java.sql.*;
 import java.util.ArrayList;

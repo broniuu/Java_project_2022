@@ -1,5 +1,10 @@
 package com.example.java_project_2022.model;
 
+/**
+ * Klasa reprezentuje danie
+ */
+
+
 public class Dish {
     private int dishId;
     private String name;

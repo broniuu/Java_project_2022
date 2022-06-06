@@ -1,5 +1,10 @@
 package com.example.java_project_2022.model;
 
+/**
+ * Klasa reprezentuje użytkownika
+ */
+
+
 public class User {
     private int userId;
     private String login;

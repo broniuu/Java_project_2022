@@ -2,6 +2,11 @@ package com.example.java_project_2022.model;
 
 import java.util.List;
 
+/**
+ * Klasa reprezentuje koszyk użytkownika
+ */
+
+
 public class UserCart {
     private User user;
     private List<CartItem> cartItems;

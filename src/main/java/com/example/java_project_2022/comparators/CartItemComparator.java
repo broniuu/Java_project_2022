@@ -1,6 +1,13 @@
-package com.example.java_project_2022.model;
+package com.example.java_project_2022.comparators;
+
+import com.example.java_project_2022.model.CartItem;
 
 import java.util.Comparator;
+
+/**
+ * Klasa służy do porównywania ze sobą obiektów klasy CartItem
+ */
+
 
 public class CartItemComparator implements Comparator<CartItem> {
     @Override
