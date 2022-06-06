@@ -8,7 +8,8 @@ import java.util.Comparator;
  * Klasa służy do porównywania ze sobą obiektów klasy User
  */
 
-public class UserComparator implements Comparator<User> {
+public class
+UserComparator implements Comparator<User> {
 
     @Override
     public int compare(User user1, User user2) {
