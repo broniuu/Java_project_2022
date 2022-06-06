@@ -165,7 +165,8 @@ public class SummaryController implements Initializable {
         box.setSpacing(20);
         Label nameLabel =new Label();
         Label priceLabel =new Label();
-
+        nameLabel.setMinSize(220,20);
+        nameLabel.setMaxSize(220,20);
         Label quntity=new Label(""+I[0]);
         Button plus=new Button("+");
         plus.setOnAction(event -> {
@@ -180,6 +181,11 @@ public class SummaryController implements Initializable {
         minus.setOnAction(event -> {
             if(I[0] >0){
                 I[0]--;
+                if(I[0]==0){
+                    cardItemJdbcHelper.deleteCartItem( cartItem);
+                    clear();
+                    iniSummary();
+                }
             }
             cartItem.setCountOfDish(I[0]);
             cardItemJdbcHelper.updateCartItem(cartItem);
