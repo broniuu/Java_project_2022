@@ -10,7 +10,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardItemJdbcHelper {
+/**
+ * Klasa zawiera metody potrzebne do obsługi obiektów klasy CartItem w bazie danych
+ */
+
+public class CartItemJdbcHelper {
     public static final String SHOPPING_CART_TABLE = "ShoppingCart";
     public static final String COLUMN_CART_ITEM_ID = "CartItemId";
     public static final String COLUMN_DISH_ID = "DishId";
@@ -18,6 +22,12 @@ public class CardItemJdbcHelper {
     public static final String COLUMN_COUNT_OF_DISH = "CountOfDish";
 
     DbConnector dbConnector = new DbConnector();
+
+    /**
+     * pobiera wszystkie wiersze z tabeli ShoppingCart w bazie danych i tworzy z listę obiektów klasy CartItem
+     *
+     * @return zwraca listę obiektów klasy CartItem
+     */
 
     public List<CartItem> getCartItems(){
         List<CartItem> cartItems = new ArrayList<>();
@@ -38,6 +48,14 @@ public class CardItemJdbcHelper {
         }
         return cartItems;
     }
+
+    /**
+     * Zwraca pobiera wszystkie wiersze z tabeli ShoppingCart w bazie danych z danym userId i tworzy z listę obiektów klasy CartItem
+     *
+     * @param usId ID właścicela produktów z koszyka
+     * @return zwraca listę obiektów klasy CartItem
+     */
+
     public List<CartItem> getCartItems(int usId){
         List<CartItem> cartItems = new ArrayList<>();
         String queryString = "SELECT * FROM " + SHOPPING_CART_TABLE+" where UserId == "+ usId;
@@ -59,6 +77,14 @@ public class CardItemJdbcHelper {
         }
         return cartItems;
     }
+
+    /**
+     * dodaje obiekt klasy cartItem do bazy danych
+     *
+     * @param cartItem obiekt, który chcemy dodać
+     * @return zwraca informację o powodzeniu, lub niepowodzeniu zapytania
+     */
+
     public boolean addCartItem(CartItem cartItem) {
 
         DbConnector dbConnector = new DbConnector();
@@ -80,6 +106,13 @@ public class CardItemJdbcHelper {
         }
     }
 
+    /**
+     * Usówa z bazy danych wybrany item
+     *
+     * @param cartItem item, który chcemy usunąć
+     * @return zwraca informację o powodzeniu, lub niepowodzeniu zapytania
+     */
+
     public boolean deleteCartItem(CartItem cartItem){
         DbConnector dbConnector = new DbConnector();
         String queryString = "DELETE FROM " + SHOPPING_CART_TABLE + " WHERE " + COLUMN_CART_ITEM_ID + " = ?";
@@ -92,6 +125,14 @@ public class CardItemJdbcHelper {
             return false;
         }
     }
+
+    /**
+     * Aktualizuje wybrany cartItem w bazie danych
+     *
+     * @param cartItem
+     * @return zwraca informację o powodzeniu, lub niepowodzeniu zapytania
+     */
+
     public boolean updateCartItem(CartItem cartItem) {
         DbConnector dbConnector = new DbConnector();
         String queryString = "UPDATE ShoppingCart\n" +
@@ -109,6 +150,12 @@ public class CardItemJdbcHelper {
         }
     }
 
+    /**
+     * dodaje jeśli jeszcze nie ma w bazie danych lub aktualizuje podany cartItem
+     *
+     * @param cartItem obiekt, który chcemy upsertować
+     * @return zwraca informację o powodzeniu, lub niepowodzeniu zapytania
+     */
     public boolean upsertCartItem(CartItem cartItem){
         List<CartItem> cartItems = this.getCartItems();
         CartItemComparator cartItemComparator = new CartItemComparator();

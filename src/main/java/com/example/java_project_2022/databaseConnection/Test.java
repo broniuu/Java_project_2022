@@ -26,7 +26,7 @@ public class Test {
         //boolean delSuccess = userJdbcHelper.deleteUser(user1);
         //boolean AddSuccess = userJdbcHelper.addUser(user);
         List<User> users = userJdbcHelper.getUsers();
-        CardItemJdbcHelper cardItemJdbcHelper = new CardItemJdbcHelper();
+        CartItemJdbcHelper cardItemJdbcHelper = new CartItemJdbcHelper();
         CartItem cartItem =new CartItem(2,3);
         CartItem cartItem2 =new CartItem(11,1,3);
         CartItem cartItem3 =new CartItem(31,3,2,10);

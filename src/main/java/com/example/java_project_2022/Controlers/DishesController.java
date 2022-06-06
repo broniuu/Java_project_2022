@@ -1,7 +1,7 @@
 package com.example.java_project_2022.Controlers;
 
 import com.example.java_project_2022.HelloApplication;
-import com.example.java_project_2022.databaseConnection.CardItemJdbcHelper;
+import com.example.java_project_2022.databaseConnection.CartItemJdbcHelper;
 import com.example.java_project_2022.model.CartItem;
 import com.example.java_project_2022.model.Dish;
 import com.example.java_project_2022.model.User;
@@ -119,7 +119,7 @@ public class DishesController implements Initializable {
             if(Quantity[0] >0){
                 CartItem cartItem=new CartItem(currentUser.getUserId(),dish.getDishId(), Quantity[0]);
                 System.out.println(dish.getDishId());
-                CardItemJdbcHelper CIH=new CardItemJdbcHelper();
+                CartItemJdbcHelper CIH=new CartItemJdbcHelper();
                 CIH.upsertCartItem(cartItem);
                 Quantity[0]=0;
                 quntityLabel.setText(""+(Quantity[0]));

@@ -8,6 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa zawiera metody potrzebne do obsługi obiektów klasy Dish w bazie danych
+ */
+
 public class DishJdbcHelper {
     public static final String DISH_TABLE = "Dishes";
     public static final String COLUMN_DISH_ID = "DishId";
@@ -18,6 +22,13 @@ public class DishJdbcHelper {
     public static final String COLUMN_IMAGE_URL = "ImageUrl";
 
     DbConnector dbConnector = new DbConnector();
+
+
+    /**
+     * pobiera wszystkie wiersze z tabeli Dishes w bazie danych i tworzy z listę obiektów klasy Dish
+     *
+     * @return zwraca listę obiektów klasy Dish
+     */
 
     public List<Dish> getDishes(){
         List<Dish> dishes = new ArrayList<>();

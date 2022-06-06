@@ -1,6 +1,10 @@
 package com.example.java_project_2022.databaseConnection;
 import java.sql.*;
 
+/**
+ * Klasa służy do tworzenia połączenia za bazą danych
+ */
+
 public class DbConnector {
     private String currentDirectoryPath = System.getProperty("user.dir");
     private final String dataBaseName = "data.db";
@@ -12,9 +16,19 @@ public class DbConnector {
         connection = makeConnection();
     }
 
+    /**
+     * @return zwraca obecne połączenie z bazą danych
+     */
+
     public Connection getConnection(){
         return(connection);
     }
+
+    /**
+     * tworzy połączenie z bazą danych
+     *
+     * @return zwraca połączenie z bazą danych
+     */
 
     public Connection makeConnection(){
         try {
@@ -28,6 +42,11 @@ public class DbConnector {
             return(null);
         }
     }
+
+    /**
+     * zamyka połączenie z bazą danych
+     *
+     */
 
     public void close() {
         try {

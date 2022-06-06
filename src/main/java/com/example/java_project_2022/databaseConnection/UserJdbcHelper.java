@@ -7,6 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa zawiera metody potrzebne do obsługi obiektów klasy User w bazie danych
+ */
+
 public class UserJdbcHelper {
     public static final String COLUMN_USER_ID = "UserId";
     public static final String USER_TABLE = "Users";
@@ -19,6 +23,12 @@ public class UserJdbcHelper {
     public static final String COLUMN_EXPIRE_DATE = "ExpireDate";
     public static final String COLUMN_CVV = "Cvv";
     private static final String COLUMN_EMAIL = "Email";
+
+    /**
+     * pobiera wszystkie wiersze z tabeli ShoppingCart w bazie danych i tworzy z listę obiektów klasy User
+     *
+     * @return zwraca listę obiektów klasy User
+     */
 
     public List<User> getUsers(){
         DbConnector dbConnector = new DbConnector();
@@ -48,6 +58,13 @@ public class UserJdbcHelper {
         }
         return users;
     }
+
+    /**
+     * dodaje obiekt klasy user do bazy danych
+     *
+     * @param user obiekt, który chcemy dodać
+     * @return zwraca informację o powodzeniu, lub niepowodzeniu zapytania
+     */
 
     public boolean addUser(User user) {
 
@@ -86,6 +103,14 @@ public class UserJdbcHelper {
             return false;
         }
     }
+
+    /**
+     * Usówa z bazy danych wybranego usera
+     *
+     * @param user item, który chcemy usunąć
+     * @return zwraca informację o powodzeniu, lub niepowodzeniu zapytania
+     */
+
     public boolean deleteUser (User user){
         DbConnector dbConnector = new DbConnector();
         String queryString = "DELETE FROM " + USER_TABLE + " WHERE " + COLUMN_USER_ID + " = ?";
@@ -98,6 +123,16 @@ public class UserJdbcHelper {
             return false;
         }
     }
+
+    /**
+     * sprawdza czy użytkownik z podanym loginem i hasłem znajduje się w bazie danych
+     *
+     * @param login
+     * @param password
+     * @return zwraca informację o tym czy użytkownik istnieje czy nie
+     * @throws SQLException
+     */
+
     public boolean checkUser(String login,String password) throws SQLException {
         DbConnector dbConnector=new DbConnector();
 
@@ -111,6 +146,15 @@ public class UserJdbcHelper {
         }
         return false;
     }
+
+    /**
+     * Sprawdza czy login nie jest już zajęty
+     *
+     * @param login
+     * @return zwraca informacje o tym czy login zajęty czy nie
+     * @throws SQLException
+     */
+
     public boolean isLoginFree(String login) throws SQLException {
         DbConnector dbConnector=new DbConnector();
 
@@ -125,6 +169,12 @@ public class UserJdbcHelper {
         return true;
     }
 
+    /**
+     * Aktualizuje wybrany user w bazie danych
+     *
+     * @param user
+     * @return zwraca informację o powodzeniu, lub niepowodzeniu zapytania
+     */
 
     public boolean updateUser(User user){
         DbConnector dbConnector = new DbConnector();

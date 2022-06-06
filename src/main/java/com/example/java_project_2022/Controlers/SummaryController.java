@@ -1,7 +1,7 @@
 package com.example.java_project_2022.Controlers;
 import com.example.java_project_2022.HelloApplication;
 import com.google.zxing.WriterException;
-import com.example.java_project_2022.databaseConnection.CardItemJdbcHelper;
+import com.example.java_project_2022.databaseConnection.CartItemJdbcHelper;
 import com.example.java_project_2022.databaseConnection.DishJdbcHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +47,7 @@ public class SummaryController implements Initializable {
     public BorderPane BPane;
     public ChoiceBox<String> deliveryBox;
     public HBox bottomPane;
-    CardItemJdbcHelper cardItemJdbcHelper;
+    CartItemJdbcHelper cardItemJdbcHelper;
     User currentUser;
 
     List<CartItem> cartItems;
@@ -136,7 +136,7 @@ public class SummaryController implements Initializable {
      */
     public List<CartItem> getItems(){
 
-        cardItemJdbcHelper = new CardItemJdbcHelper();
+        cardItemJdbcHelper = new CartItemJdbcHelper();
         return cardItemJdbcHelper.getCartItems(currentUser.getUserId());
 
     }
@@ -150,7 +150,7 @@ public class SummaryController implements Initializable {
      */
     public HBox newItemBox(CartItem cartItem){
 
-        cardItemJdbcHelper=new CardItemJdbcHelper();
+        cardItemJdbcHelper=new CartItemJdbcHelper();
         final int[] I = {cartItem.getCountOfDish()};
         HBox box =new HBox();
         box.setAlignment(Pos.CENTER);
@@ -228,7 +228,7 @@ public class SummaryController implements Initializable {
         if(deliveryBox.getValue() == null){showSnackBar(bottomPane,deliveryMethod); return;}
         if(cartItems.isEmpty()) {showSnackBar(bottomPane,emptyCart); return;}
         //oprożnić koszyk
-        cardItemJdbcHelper=new CardItemJdbcHelper();
+        cardItemJdbcHelper=new CartItemJdbcHelper();
 
         for (CartItem item: cartItems) {
             cardItemJdbcHelper.deleteCartItem(item);
