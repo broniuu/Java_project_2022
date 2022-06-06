@@ -1,8 +1,13 @@
 package com.example.java_project_2022.Controlers;
+
 import com.example.java_project_2022.HelloApplication;
-import com.google.zxing.WriterException;
 import com.example.java_project_2022.databaseConnection.CartItemJdbcHelper;
 import com.example.java_project_2022.databaseConnection.DishJdbcHelper;
+import com.example.java_project_2022.model.CartItem;
+import com.example.java_project_2022.model.Dish;
+import com.example.java_project_2022.model.User;
+import com.example.java_project_2022.service.CartItemService;
+import com.google.zxing.WriterException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,10 +21,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import com.example.java_project_2022.model.CartItem;
-import com.example.java_project_2022.model.Dish;
-import com.example.java_project_2022.model.User;
-import com.example.java_project_2022.service.CartItemService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,10 +29,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static com.example.java_project_2022.ReceiptPrinter.PdfPrinter.makePdf;
-import static com.example.java_project_2022.Controlers.GlobalStatics.*;
 import static com.example.java_project_2022.service.MailService.sendEmail;
 import static com.example.java_project_2022.windowCreators.SnackBarCreator.showSnackBar;
-import static com.example.java_project_2022.windowCreators.SummaryWindowCreator.thanksNote;
 
 
 /**
@@ -41,6 +40,15 @@ import static com.example.java_project_2022.windowCreators.SummaryWindowCreator.
  * kupna produktu, podgladu ceny.
  */
 public class SummaryController implements Initializable {
+    String delivery="Delivery";
+    String takeaway="Takeaway";
+    String emailNotification="We send Confirmation of purchase to your email";
+    String thankYouMessage="Thank you For Buying with Szama(n)!!";
+    String deliveryMethod="Choose your delivery method";
+    String emptyCart="Your cart is empty.";
+    String noteForChief="Add note for chief / Delivery";
+    String addNote="Add note";
+
     public Pane topSummaryPane;
     public ListView<HBox> SummaryList;
     public Label priceLabel;
@@ -237,6 +245,7 @@ public class SummaryController implements Initializable {
         cartItems.clear();
         clear();
         iniSummary();
+        updatedPrice();
         //wyswietlic podziekowanie za zakup
         thanksNote();
         sendEmail(currentUser.getEmail(),"Receipt for "+currentUser.getLogin(),thankYouMessage);
@@ -258,13 +267,14 @@ public class SummaryController implements Initializable {
         if(!note.isEmpty()){
             textField.setText(note);
         }
-        Button addNote=new Button(GlobalStatics.addNote);
-        addNote.setOnAction(event1 -> {
+        Button addNoteButton =new Button(addNote);
+        addNoteButton.setOnAction(event1 -> {
             note=textField.getText();
             popupwindow.close();
         });
-        layout.getChildren().addAll(textField, addNote);
+        layout.getChildren().addAll(textField, addNoteButton);
         layout.setAlignment(Pos.CENTER);
+        layout.getStylesheets().add(getClass().getResource("/pop_up_style.css").toExternalForm());
         Scene scene1= new Scene(layout, 300, 250);
         popupwindow.initModality(Modality.APPLICATION_MODAL);
         popupwindow.setTitle(noteForChief);
@@ -288,5 +298,22 @@ public class SummaryController implements Initializable {
             deliveryFee=0;
         }
         updatedPrice();
+    }
+
+    public void thanksNote() {
+
+        Stage popupwindow=new Stage();
+        VBox layout= new VBox(10);
+        Label textField=new Label(thankYouMessage+"\n"+emailNotification);
+
+        Button closeWindow =new Button("Close Window");
+        closeWindow.setOnAction(event -> popupwindow.close());
+        layout.getChildren().addAll(textField, closeWindow);
+        layout.setAlignment(Pos.CENTER);
+        layout.getStylesheets().add(getClass().getResource("/pop_up_style.css").toExternalForm());
+        Scene scene1= new Scene(layout, 300, 250);
+        popupwindow.initModality(Modality.APPLICATION_MODAL);
+        popupwindow.setScene(scene1);
+        popupwindow.showAndWait();
     }
 }

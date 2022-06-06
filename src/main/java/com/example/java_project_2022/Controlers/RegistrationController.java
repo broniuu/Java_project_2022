@@ -2,6 +2,7 @@ package com.example.java_project_2022.Controlers;
 
 import com.example.java_project_2022.HelloApplication;
 import com.example.java_project_2022.databaseConnection.UserJdbcHelper;
+import com.example.java_project_2022.model.User;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -12,12 +13,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import com.example.java_project_2022.model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
-import static com.example.java_project_2022.Controlers.GlobalStatics.*;
 import static com.example.java_project_2022.service.Validators.*;
 import static com.example.java_project_2022.windowCreators.SnackBarCreator.showSnackBar;
 
@@ -26,6 +25,14 @@ import static com.example.java_project_2022.windowCreators.SnackBarCreator.showS
  * klasa umozliwiajaca zarejestrowanie nowego uzytkownika w systemie.
  */
 public class RegistrationController {
+    String incorrectPassword="Your password needs to have at least 1 big Letter, 1 number and 1 special character ";
+    String notIdenticalPasswords="Your Passwords are not identical ";
+    String incorrectLogin ="this login already exists";
+    String invalidEmail="This Email Isn't valid";
+    String invalidCvv="Correct ccv format is xxx";
+    String invalidPostCode="Correct postCode format is xx-xxx";
+    String invalidCard="Debit Card is not valid";
+    String expireDate="Correct expire date format is xx/xx";
 
     public TextField RCardNumberBox;
     public TextField RCCVBBox;

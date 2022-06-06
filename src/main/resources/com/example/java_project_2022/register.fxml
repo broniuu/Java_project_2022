@@ -17,10 +17,10 @@
                               <TextField fx:id="RLogin" alignment="CENTER" />
                               <Label alignment="CENTER" text="Password" />
                               <PasswordField fx:id="RPassword" />
-                              <Label alignment="CENTER" text="Reapeat Password" />
-                              <PasswordField fx:id="RReapeatPassword" />
+                              <Label alignment="CENTER" text="Reapeat Password"  />
+                              <PasswordField fx:id="RReapeatPassword"   alignment="CENTER" />
                               <Label alignment="CENTER" text="Email" />
-                              <TextField fx:id="REmail" alignment="CENTER_LEFT" />
+                              <TextField fx:id="REmail" alignment="CENTER" />
                            </children>
                         </VBox>
 
@@ -41,8 +41,8 @@
                                     <TextField fx:id="RNameBox" alignment="CENTER" />
                                     <Label text="Surname" />
                                     <TextField fx:id="RSurnameBox" alignment="CENTER" />
-                              <Label text="City" />
-                              <TextField fx:id="RCity" prefHeight="25.0" prefWidth="587.0" />
+                                    <Label text="City" />
+                               <TextField fx:id="RCity" alignment="CENTER" />
                                     <Label text="Street" />
                                     <TextField fx:id="RStreetBox" alignment="CENTER" />
                                     <Label text="HomeNumber" />
@@ -86,7 +86,7 @@
                   <children>
 
                   <Button layoutX="504.0" layoutY="314.0" mnemonicParsing="false" onAction="#register" prefHeight="43.0" prefWidth="94.0" text="Register" />
-                  <Label layoutX="280.0" layoutY="177.0" text="Label" />
+                  <Label layoutX="280.0" layoutY="177.0" text="Label"  />
                   <ListView fx:id="RSummaryView" fixedCellSize="60.0" layoutX="4.0" layoutY="50.0" prefHeight="246.0" prefWidth="1059.0" stylesheets="/list_style.css" />
                   </children></AnchorPane>
           </content>

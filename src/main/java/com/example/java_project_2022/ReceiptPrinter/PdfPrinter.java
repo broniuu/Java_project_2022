@@ -16,13 +16,10 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.HorizontalAlignment;
 import com.example.java_project_2022.model.CartItem;
 import com.example.java_project_2022.model.User;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
-
-
 import static com.example.java_project_2022.ReceiptPrinter.ImageConverters.getImageAsByteArray;
 import static com.itextpdf.kernel.geom.PageSize.A4;
 
@@ -32,7 +29,6 @@ import static com.itextpdf.kernel.geom.PageSize.A4;
  * klasa obslugujaca tworzenie pliku pdf z rachunkiem
  */
 public class PdfPrinter {
-
     /**
      *
      * Make pdf - funkcja tworzaca i zapisujaca pdf
@@ -49,7 +45,6 @@ public class PdfPrinter {
         PdfWriter pdfWriter=new PdfWriter(new File("./plik.pdf").getCanonicalPath());
         Random random=new Random();
         long nr= random.nextInt(123);
-
         com.itextpdf.layout.element.List orders=new com.itextpdf.layout.element.List();
         com.itextpdf.layout.element.List orders2=new com.itextpdf.layout.element.List();
         StringBuilder qrOrders= new StringBuilder();
@@ -78,7 +73,6 @@ public class PdfPrinter {
                 .setMargin(30f)
                 .setMarginBottom(30f)
                 .setFontSize(30f).setBorder(Border.NO_BORDER));
-
         //tworzenie KODU QR
         String infoToCode=currentUser.getUserId()+" | "+currentUser.getLogin()+" | "+currentUser.getName()+" | "+currentUser.getSurname()+" | "+" ORDER: "+
                 nr+"\n"+qrOrders;
@@ -128,8 +122,6 @@ public class PdfPrinter {
         listcell2.add(orders2);
         customerOrder.addCell(listcell1);
         customerOrder.addCell(listcell2);
-
-
         document.add(table);
         document.add(new Paragraph("\n"));
         document.add(customerinfo);
@@ -140,6 +132,4 @@ public class PdfPrinter {
         document.add(summary);
         document.close();
     }
-
-
 }

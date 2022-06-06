@@ -12,9 +12,6 @@ import javafx.stage.Stage;
 import com.example.java_project_2022.model.User;
 import java.io.IOException;
 
-import static com.example.java_project_2022.Controlers.GlobalStatics.HEIGHT;
-import static com.example.java_project_2022.Controlers.GlobalStatics.WIDTH;
-
 
 /**
  * The class Menu controller klasa obslugujaca menu.
@@ -23,7 +20,8 @@ public class MenuController {
     public Label currentNameLabel;
     public User currentUser;
     public ToolBar MenuBar;
-
+    static int HEIGHT =560;
+    static int WIDTH =1100;
 
     /**
      *

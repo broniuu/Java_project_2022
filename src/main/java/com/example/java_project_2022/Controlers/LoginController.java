@@ -17,15 +17,17 @@ import com.example.java_project_2022.windowCreators.SnackBarCreator;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import static com.example.java_project_2022.Controlers.GlobalStatics.*;
+
 /**
  *klasa ta obsługuje okno loginu.
  * */
 public class LoginController {
-
+    String incorrectLoginOrPassword="Incorrect login or password";
     public TextField passwordBox;
     public TextField loginBox;
     public Button loginButton;
+    static int HEIGHT =560;
+    static int WIDTH =1100;
     public VBox rootPane;
     /**
      * Klasa ta umożliwia odpowiada na nacisniecie przycisku i sprawdza czy zalogowanie jest mozliwe.

@@ -26,8 +26,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static com.example.java_project_2022.Controlers.GlobalStatics.HEIGHT;
-import static com.example.java_project_2022.Controlers.GlobalStatics.WIDTH;
 
 /**
  * Klasa ta odpowiada za wyswietlanie list dostepnych restauracji oraz umożliwia przejscie do menu danej restauracji.
@@ -35,9 +33,8 @@ import static com.example.java_project_2022.Controlers.GlobalStatics.WIDTH;
  */
 
 public class RestaurantsController implements Initializable {
-    /**
-     * numberOfRows sluzy do ustalenia w jakiej ilości kolumn bedą wyświtlać się restauracje.
-     */
+    static int HEIGHT =560;
+    static int WIDTH =1100;
     int numberOfCols =3;
     public Pane topRestaurantsPane;
     public BorderPane BorderPaneRestaurants;
